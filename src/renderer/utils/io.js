@@ -1,13 +1,15 @@
 import { remote } from 'electron';
 import iconv from 'iconv-lite';
 import { isDigitStrict } from './inputCheck';
+import { pad1 } from './conversions';
+
 iconv.skipDecodeWarning = true;
 
 // load config file (WMCtest.cfg)
 export const loadConfig = (cfgFileName, maxTests) => {
   const fs = require('fs');
   let f;
-  const cfg = [];
+  const cfg = { tests: [] };
   // try both EUC-KR and UTF-8 encoding
   try {
     f = fs.readFileSync(cfgFileName, 'utf-8');
@@ -29,7 +31,8 @@ export const loadConfig = (cfgFileName, maxTests) => {
   tests = tests.filter(e => isDigitStrict(e[0]));
   tests = tests.map(e => parseInt(e[0], 10));
   tests = tests.filter(e => e > 0 || e <= maxTests); // 1 ~ `maxTests(8)` are only allowed numbers
-  return tests.slice(0, maxTests); // use first `maxTests(8)` tests
+  cfg.tests = tests.slice(0, maxTests); // use first `maxTests(8)` tests
+  return cfg;
 };
 
 export const loadTestConfig = (testId) => {
@@ -52,7 +55,6 @@ export const loadTestConfig = (testId) => {
     }
   }
 
-  console.log(f);
   let cfg;
   try {
     cfg = JSON.parse(f);
@@ -64,12 +66,10 @@ export const loadTestConfig = (testId) => {
   }
 
   return cfg;
-}
-
+};
 
 // repr array for csv format
-const dumpArray = arr => `"[${arr}]"`.replace(',', ', ');
-
+const dumpArray = arr => `"[${arr}]"`.replace(/,/g, ', ');
 
 const formatResultType1 = (user, result) => {
   const type1Header = 'school.name,grade.class,number,name,birth.year.month,sex,test.id,test.date,test.startTime,test.endTime,trial.No,trial.question,trial.response,trial.result,trial.load,ANU.points,ANL.points,trial.startTime,trial.endTime,trial.durationTime';
@@ -79,12 +79,14 @@ const formatResultType1 = (user, result) => {
   type1Tests.forEach((e) => {
     const key = `test${e}`;
     if (Object.prototype.hasOwnProperty.call(result, key)) {
-      const r = result[key];
-      s += '\n';
-      s += `${user.school},${user.grade}${user.class},${user.number},${user.name},${user.year}${user.month},${user.sex},`;
-      s += `${r.testId},${r.testDate},${r.testStartTime},${r.testEndTime},${r.trialNo},`;
-      s += `${dumpArray(r.trialQuestion)},${dumpArray(r.trialResponse)},${r.trialResult},${r.trialLoad},`;
-      s += `${r.anuPoints},${r.anulPoints},${r.trialStartTime},${r.trialEndTime},${r.trialDurationTime}`;
+      const resultArray = result[key];
+      resultArray.forEach((r) => {
+        s += '\n';
+        s += `${user.school},${user.grade}${user.class},${user.number},${user.name},${user.year}${user.month},${user.sex},`;
+        s += `${r.testId},${r.testDate},${r.testStartTime},${r.testEndTime},${r.trialNo},`;
+        s += `${dumpArray(r.trialQuestion)},${dumpArray(r.trialResponse)},${r.trialResult},${r.trialLoad},`;
+        s += `${r.anuPoints},${r.anlPoints},${r.trialStartTime},${r.trialEndTime},${r.trialDurationTime}`;
+      });
     }
   });
   return s;
@@ -97,24 +99,36 @@ const formatResultType2 = (user, result) => {
   type2Tests.forEach((e) => {
     const key = `test${e}`;
     if (Object.prototype.hasOwnProperty.call(result, key)) {
-      const r = result[key];
-      s += '\n';
-      s += `${user.school},${user.grade}${user.class},${user.number},${user.name},${user.year}${user.month},${user.sex},`;
-      s += `${r.testId},${r.testDate},${r.testStartTime},${r.testEndTime},${r.trialNo},`;
-      s += `${dumpArray(r.trialAnswer)},${dumpArray(r.trialResponse)},${r.trialResult},${r.trialLoad},`;
-      s += `${r.anuPoints},${r.anulPoints},${r.trialStartTime},${r.trialEndTime},${r.trialDurationTime},`;
-      s += `${dumpArray(r.interAnswer)},${dumpArray(r.interResponse)},${r.interResult},${r.interPoints}`;
+      const resultArray = result[key];
+      resultArray.forEach((r) => {
+        s += '\n';
+        s += `${user.school},${user.grade}${user.class},${user.number},${user.name},${user.year}${user.month},${user.sex},`;
+        s += `${r.testId},${r.testDate},${r.testStartTime},${r.testEndTime},${r.trialNo},`;
+        s += `${dumpArray(r.trialAnswer)},${dumpArray(r.trialResponse)},${r.trialResult},${r.trialLoad},`;
+        s += `${r.anuPoints},${r.anlPoints},${r.trialStartTime},${r.trialEndTime},${r.trialDurationTime},`;
+        s += `${dumpArray(r.interAnswer)},${dumpArray(r.interResponse)},${r.interResult},${r.interPoints}`;
+      });
     }
   });
   return s;
 };
 
 export const saveResult = (user, result) => {
+  const fs = require('fs');
+
   const d = new Date();
   const month = d.getMonth() + 1;
   const date = d.getDate();
-  const hour = d.getHours();
-  const minute = d.getMinutes();
-  const seconds = d.getSeconds();
+  const hour = pad1(d.getHours());
+  const minute = pad1(d.getMinutes());
+  const seconds = pad1(d.getSeconds());
   const title = `${user.school}_${user.grade}_${user.class}_${user.number}_${month}_${date}_${hour}${minute}${seconds}`;
+
+  const result1 = formatResultType1(user, result);
+  const result2 = formatResultType2(user, result);
+  const title1 = `${title}_1.csv`;
+  const title2 = `${title}_2.csv`;
+
+  fs.writeFileSync(title1, result1, 'utf-8');
+  fs.writeFileSync(title2, result2, 'utf-8');
 };

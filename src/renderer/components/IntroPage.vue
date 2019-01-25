@@ -3,7 +3,7 @@
     <!-- <img id="logo" src="~@/assets/logo.png" alt="electron-vue"> -->
     <div id="titles">
       <h1 is="sui-header" id="title" textAlign="center" size="huge" color="blue">작업기억 검사</h1>
-      <h1 is="sui-header" textAlign="center" size="huge">초등학생용</h1>
+      <h1 is="sui-header" id="smalltitle" textAlign="center" size="huge">초등학생용</h1>
       <MovePageButton :route="nextRoute" msg="시작" />
     </div>
   </div>
@@ -20,26 +20,29 @@
     components: { MovePageButton },
     data() {
       return {
-        // nextRoute: '/information-gathering',
-        nextRoute: '/test-explanation/1',
+        nextRoute: '/information-gathering',
+        enterListener: null,
       };
     },
     methods: {
     },
     created() {
-      const listener = EnterMoveListener('keyup', this.$router, this.nextRoute);
-      window.addEventListener('keyup', listener);
+      this.enterListener = EnterMoveListener('keyup', this.$router, this.nextRoute);
+      window.addEventListener('keyup', this.enterListener);
 
       const cfgFileName = 'WMCtest.cfg';
       const maxTests = 8;
       const cfg = loadConfig(cfgFileName, maxTests);
       window.$cookies.set('tests', cfg);
-      window.$cookies.set('current-test-id', 0);
+      window.$cookies.set('current-test-id', 1);
 
       for (let i = 1; i <= 1; i += 1) {
         const cfg = loadTestConfig(i);
         window.$cookies.set(`test${i}-config`, cfg);
       }
+    },
+    beforeDestroy() {
+      window.removeEventListener('keyup', this.enterListener);
     },
   };
 </script>
@@ -62,19 +65,20 @@
   h1 { font-size: 1rem; }
   body { font-family: 'Source Sans Pro', sans-serif; }
 
-  #title { font-size: 5rem; }
+  #title { font-size: 6rem; }
   #smalltitle { font-size: 3rem; }
   #titles { margin: 20vh auto; }
+  
 
   #wrapper {
     background:
       radial-gradient(
         ellipse at top left,
-        rgba(255, 255, 255, 1) 40%,
+        rgba(245, 245, 245, 1) 40%,
         rgba(229, 229, 229, .9) 100%
       );
     height: 100vh;
-    padding: 60px 80px;
+    padding: 30px 80px;
     width: 100vw;
   }
 
@@ -144,7 +148,7 @@
     justify-content: flex-end;
     align-items: center;
     text-align: center;
-    padding-top: 5vh;
+    padding-top: 3vh;
   }
 
   .center.container {
@@ -155,4 +159,66 @@
     align-items: center;
     text-align: left;
   }
+
+  .center.container.margin.top {
+    padding-top: 20vh;
+  }
+
+  .center.container.wide {
+    display: block;
+    flex-direction: column;
+    width: 50vw;
+    margin: auto;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    align-items: center;
+    text-align: left;
+  }
+
+  .flex-container {
+    margin-top: 20vh;
+  }
+
+  .test.header {
+    background-color: #D9E9FF;
+    color: #D9E9FF;
+    height: 15vh;
+  }
+
+  .centered-input {
+    text-align: center;
+  }
+
+  
+  #test-div {
+    display: flex;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    height: 50vh;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #test-input-div {
+    display: flex;
+    height: 10vh;
+    align-items: center;
+    justify-content: center;    
+  }
+
+  #test-div-elem {
+    min-width: 50%;
+    max-width: 80%;
+  }
+
+  #testletter {
+    font-size: 35vh;
+  }
+
+  #testexplanation {
+    font-size: 5vh;
+  }
+
+
+
 </style>

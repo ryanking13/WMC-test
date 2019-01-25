@@ -20,9 +20,10 @@
     methods: {
     },
     created() {
-      // const user = window.$cookies.get('user');
-      // const result = window.$cookies.get('test-result');
-      // saveResult(user, result);
+      const user = window.$cookies.get('user');
+      const result = window.$cookies.get('test-result');
+      console.log(result);
+      saveResult(user, result);
     },
   };
 </script>

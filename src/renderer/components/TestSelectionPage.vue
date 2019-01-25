@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      current: 1,
+      currentTestId: 1,
       tests: [],
       testButtons: [
         { id: 1, key: 'test1', name: '검사1' },
@@ -41,13 +41,10 @@ export default {
         { id: 6, key: 'test6', name: '검사6' },
         { id: 7, key: 'test7', name: '검사7' },
         { id: 8, key: 'test8', name: '검사8' },
-      ]
-    }
+      ],
+    };
   },
   computed: {
-    currentTestId() {
-      return parseInt(this.tests[this.current], 10);
-    },
     currentTestName() {
       const t = this.testButtons.filter(e => e.id === this.currentTestId);
       return t[0].name;
@@ -60,14 +57,18 @@ export default {
         g.push(this.testButtons.slice(i * colNum, (i + 1) * colNum));
       }
       return g;
-    }
+    },
   },
   created() {
-    this.tests = window.$cookies.get('tests');
-    this.current = window.$cookies.get('current-test-id');
-    console.log(this.current);
-    console.log(this.tests);
+    this.tests = window.$cookies.get('tests').tests;
+
+    // check if finished all test
+    const id = parseInt(window.$cookies.get('current-test-id'), 10);
+    if (id > this.tests.length) {
+      this.$router.push('/end');
+    }
+    this.currentTestId = id;
   },
-}
+};
 </script>
 

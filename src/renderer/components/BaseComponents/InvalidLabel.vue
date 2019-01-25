@@ -1,6 +1,6 @@
 <template>
   <sui-label
-    size="standard"
+    size="large"
     :color="color"
     v-show="condition"
     :pointing="pointing"
@@ -19,7 +19,7 @@
         default: '',
       },
       color: {
-        default: 'yellow',
+        default: 'orange',
       },
       pointing: {
         default: 'above',

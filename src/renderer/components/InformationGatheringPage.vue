@@ -2,7 +2,7 @@
   <div id="wrapper">
     <div class="center container">
       <sui-form>
-        <h3 is="sui-header">학교명</h3>
+        <h3 is="sui-header" size="large">학교명</h3>
         <sui-form-field inline>
           <sui-button
             :color="(schoolButtonSukgyeOn === true) ? 'orange' : 'blue'"
@@ -29,7 +29,7 @@
               msg="3 글자 이내로 입력하세요"
             />
         </sui-form-field>
-        <h3 is="sui-header">학년반</h3>
+        <h3 is="sui-header" size="large">학년반</h3>
         <sui-form-field inline>
           <sui-dropdown
             placeholder="학년"
@@ -45,7 +45,7 @@
           />
         </sui-form-field>
         <sui-form-field>
-          <h3 is="sui-header">번호</h3>
+          <h3 is="sui-header" size="large">번호</h3>
           <input
             @keydown.enter="blockEnter"
             @input="numberInput = $event.target.value"
@@ -56,7 +56,7 @@
             msg="01 ~ 99 사이의 숫자만 입력하세요"
           />
         </sui-form-field>
-        <h3 is="sui-header">생년월</h3>
+        <h3 is="sui-header" size="large">생년월</h3>
         <sui-form-field inline>
           <sui-dropdown
             placeholder="년"
@@ -72,7 +72,7 @@
           />
         </sui-form-field>
         <sui-form-field>
-          <h3 is="sui-header">이름</h3>
+          <h3 is="sui-header" size="large">이름</h3>
           <input
             @keydown.enter="blockEnter"
             @input="nameInput = $event.target.value"
@@ -83,7 +83,7 @@
             msg="이름은 한글 3글자 이내로 입력하세요"
           />
         </sui-form-field>
-        <h3 is="sui-header">성별</h3>
+        <h3 is="sui-header" size="large">성별</h3>
         <sui-form-field inline>
           <sui-button
             :color="(sexButtonMaleOn === true) ? 'orange' : 'blue'"
@@ -224,11 +224,13 @@
       },
       onClickNext() {
         const userCookie = {};
+        const year = this.birthYearOptions.filter(e => e.value === this.birthYearInput)[0].text;
+        const month = this.birthMonthOptions.filter(e => e.value === this.birthMonthInput)[0].text;
         userCookie.school = (this.schoolButtonSukgyeOn) ? 'Sukgye' : this.schoolInput;
         userCookie.grade = this.gradeInput;
         userCookie.class = this.classInput;
-        userCookie.year = this.birthYearOptions.filter(e => e.value === this.birthYearInput).text;
-        userCookie.month = this.birthMonthOptions.filter(e => e.value === this.birthMonthInput).text;
+        userCookie.year = year;
+        userCookie.month = month;
         userCookie.number = (this.numberInput.length === 2) ? this.numberInput : `0${this.numberInput}`;
         userCookie.name = this.nameInput;
         userCookie.sex = (this.sexButtonMaleOn) ? 'M' : 'F';

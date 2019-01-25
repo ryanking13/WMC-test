@@ -27,9 +27,10 @@ export default new Router({
       props: true,
     },
     {
-      path: '/wmc',
-      name: 'WMC-test-page',
-      component: require('@/components/WMCTestPage').default,
+      path: '/test/:id/:type',
+      name: 'Test-page',
+      component: require('@/components/TestPage').default,
+      props: true,
     },
     {
       path: '/end',
