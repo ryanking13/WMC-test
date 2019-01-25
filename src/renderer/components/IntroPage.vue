@@ -12,7 +12,7 @@
 
 <script>
   import MovePageButton from './BaseComponents/MovePageButton';
-  import { loadConfig } from '../utils/io';
+  import { loadConfig, loadTestConfig } from '../utils/io';
   import { EnterMoveListener } from '../utils/eventListeners';
 
   export default {
@@ -34,6 +34,11 @@
       const cfg = loadConfig(cfgFileName, maxTests);
       window.$cookies.set('tests', cfg);
       window.$cookies.set('current-test-id', 0);
+
+      for (let i = 1; i <= 1; i += 1) {
+        const cfg = loadTestConfig(i);
+        window.$cookies.set(`test${i}-config`, cfg);
+      }
     },
   };
 </script>
@@ -57,6 +62,7 @@
   body { font-family: 'Source Sans Pro', sans-serif; }
 
   #title { font-size: 5rem; }
+  #smalltitle { font-size: 3rem; }
   #titles { margin: 20vh auto; }
 
   #wrapper {

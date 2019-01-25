@@ -98,7 +98,7 @@
             여
           </sui-button>
         </sui-form-field>
-        <MovePageButton :enabled="valid" :beforeMove="onClickNext" route='/end' />
+        <MovePageButton :enabled="valid" :beforeMove="onClickNext" route='/test-selection' />
       </sui-form>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="button container">
     <sui-button
-      color="black"
+      :color="color"
       size="huge"
       @click="onClick"
       :disabled="!enabled"
@@ -30,6 +30,9 @@
       },
       enabled: {
         default: true,
+      },
+      color: {
+        default: 'black',
       },
     },
     methods: {

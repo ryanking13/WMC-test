@@ -16,6 +16,11 @@ export default new Router({
       component: require('@/components/InformationGatheringPage').default,
     },
     {
+      path: '/test-selection',
+      name: 'Test-selection-page',
+      component: require('@/components/TestSelectionPage').default,
+    },
+    {
       path: '/wmc',
       name: 'WMC-test-page',
       component: require('@/components/WMCTestPage').default,

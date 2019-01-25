@@ -1,4 +1,7 @@
+import { remote } from 'electron';
+import iconv from 'iconv-lite';
 import { isDigitStrict } from './inputCheck';
+iconv.skipDecodeWarning = true;
 
 // load config file (WMCtest.cfg)
 export const loadConfig = (cfgFileName, maxTests) => {
@@ -7,10 +10,11 @@ export const loadConfig = (cfgFileName, maxTests) => {
   const cfg = [];
   // try both EUC-KR and UTF-8 encoding
   try {
-    f = fs.readFileSync(cfgFileName, 'euc-kr');
+    f = fs.readFileSync(cfgFileName, 'binary');
+    f = iconv.decode(f, 'euc-kr');
   } catch (e) {
     try {
-      f = fs.readFileSync(cfgFileName, 'utf-8');
+      f = fs.readFileSync(cfgFileName, 'euf-8');
     } catch (e) {
       // if both fail, consider config file not exists, return default [1, .. , maxTests(8)]
       for (let i = 1; i <= maxTests; i += 1) {
@@ -27,6 +31,40 @@ export const loadConfig = (cfgFileName, maxTests) => {
   tests = tests.filter(e => e > 0 || e <= maxTests); // 1 ~ `maxTests(8)` are only allowed numbers
   return tests.slice(0, maxTests); // use first `maxTests(8)` tests
 };
+
+export const loadTestConfig = (testId) => {
+  const fs = require('fs');
+  const cfgFileName = `Test${testId}cfg.json`;
+  let f;
+
+  // try both EUC-KR and UTF-8 encoding
+  try {
+    f = fs.readFileSync(cfgFileName, 'binary');
+    f = iconv.decode(f, 'euc-kr');
+  } catch (e) {
+    try {
+      f = fs.readFileSync(cfgFileName, 'utf-8');
+    } catch (e) {
+      // if both fail, consider config file not exists
+      const { dialog } = remote;
+      dialog.showMessageBox({ type: 'error', message: `${cfgFileName} 파일이 존재하지 않습니다.` });
+      window.close();
+    }
+  }
+
+  let cfg;
+  try {
+    cfg = JSON.parse(f);
+  } catch (e) {
+    // JSON parsing failed
+    const { dialog } = remote;
+    dialog.showMessageBox({ type: 'error', message: `${cfgFileName} 파일이 올바른 JSON 문법이 아닙니다.` });
+    window.close();
+  }
+
+  return cfg;
+}
+
 
 // repr array for csv format
 const dumpArray = arr => `"[${arr}]"`.replace(',', ', ');
