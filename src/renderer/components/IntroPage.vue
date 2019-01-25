@@ -20,7 +20,8 @@
     components: { MovePageButton },
     data() {
       return {
-        nextRoute: '/information-gathering',
+        // nextRoute: '/information-gathering',
+        nextRoute: '/test-explanation/1',
       };
     },
     methods: {

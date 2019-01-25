@@ -21,6 +21,12 @@ export default new Router({
       component: require('@/components/TestSelectionPage').default,
     },
     {
+      path: '/test-explanation/:id',
+      name: 'Test-explanation-page',
+      component: require('@/components/TestExplanationPage').default,
+      props: true,
+    },
+    {
       path: '/wmc',
       name: 'WMC-test-page',
       component: require('@/components/WMCTestPage').default,

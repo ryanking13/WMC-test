@@ -10,11 +10,11 @@ export const loadConfig = (cfgFileName, maxTests) => {
   const cfg = [];
   // try both EUC-KR and UTF-8 encoding
   try {
-    f = fs.readFileSync(cfgFileName, 'binary');
-    f = iconv.decode(f, 'euc-kr');
+    f = fs.readFileSync(cfgFileName, 'utf-8');
   } catch (e) {
     try {
-      f = fs.readFileSync(cfgFileName, 'euf-8');
+      f = fs.readFileSync(cfgFileName, 'binary');
+      f = iconv.decode(f, 'euc-kr');
     } catch (e) {
       // if both fail, consider config file not exists, return default [1, .. , maxTests(8)]
       for (let i = 1; i <= maxTests; i += 1) {
@@ -39,11 +39,11 @@ export const loadTestConfig = (testId) => {
 
   // try both EUC-KR and UTF-8 encoding
   try {
-    f = fs.readFileSync(cfgFileName, 'binary');
-    f = iconv.decode(f, 'euc-kr');
+    f = fs.readFileSync(cfgFileName, 'utf-8');
   } catch (e) {
     try {
-      f = fs.readFileSync(cfgFileName, 'utf-8');
+      f = fs.readFileSync(cfgFileName, 'binary');
+      f = iconv.decode(f, 'euc-kr');
     } catch (e) {
       // if both fail, consider config file not exists
       const { dialog } = remote;
@@ -52,6 +52,7 @@ export const loadTestConfig = (testId) => {
     }
   }
 
+  console.log(f);
   let cfg;
   try {
     cfg = JSON.parse(f);

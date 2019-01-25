@@ -9,6 +9,7 @@
               color="blue"
               :msg="test.name"
               :enabled="test.id == currentTestId"
+              :route="'/test-explanation/' + test.id"
             />
           </sui-grid-column>
         </sui-grid-row>
