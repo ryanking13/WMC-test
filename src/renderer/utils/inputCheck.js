@@ -12,6 +12,6 @@ export const isDigitStrict = (val) => {
 
 // korean string
 export const isKorean = (val) => {
-  const re = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$/;
+  const re = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+[\s]?[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/;
   return re.test(val);
 };

@@ -1,5 +1,5 @@
 <template>
-  <div id="wrapper">
+  <div id="wrapper" class="hide-cursor">
     <sui-grid textAlign="center">
       <sui-grid-row :columns='3'>
         <sui-grid-column>

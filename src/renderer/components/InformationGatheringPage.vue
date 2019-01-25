@@ -98,8 +98,8 @@
             여
           </sui-button>
         </sui-form-field>
-        <MovePageButton :enabled="valid" :beforeMove="onClickNext" route='/test-selection' />
       </sui-form>
+      <MovePageButton :enabled="valid" :beforeMove="onClickNext" route='/test-selection' />
     </div>
   </div>
 </template>

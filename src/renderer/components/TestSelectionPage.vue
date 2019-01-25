@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <div id="titlesnomargin">
+    <div id="little-margin">
       <h1 is="sui-header" id="smalltitle" textAlign="center" size="huge" color="blue">작업기억 검사</h1>
       <sui-grid textAlign="center">
         <sui-grid-row v-for="(testRow, idx) in testButtonsGrid" :key="idx">
@@ -14,9 +14,10 @@
           </sui-grid-column>
         </sui-grid-row>
       </sui-grid>
-      <h1 is="sui-header" textAlign="center">준비가 되면 {{currentTestName}} 버튼을 누르세요.</h1>
+      <div id="tiny-margin">
+        <h1 is="sui-header" textAlign="center">준비가 되면 {{currentTestName}} 버튼을 누르세요.</h1>
+      </div>
     </div>
-    <MovePageButton route='/end' />
   </div>
 </template>
 

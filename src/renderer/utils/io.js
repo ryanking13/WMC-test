@@ -1,4 +1,5 @@
 import { remote } from 'electron';
+import { Howl } from 'howler';
 import iconv from 'iconv-lite';
 import { isDigitStrict } from './inputCheck';
 import { pad1 } from './conversions';
@@ -20,7 +21,7 @@ export const loadConfig = (cfgFileName, maxTests) => {
     } catch (e) {
       // if both fail, consider config file not exists, return default [1, .. , maxTests(8)]
       for (let i = 1; i <= maxTests; i += 1) {
-        cfg.push(i);
+        cfg.tests.push(i);
       }
       return cfg;
     }
@@ -66,6 +67,27 @@ export const loadTestConfig = (testId) => {
   }
 
   return cfg;
+};
+
+// load audio(number, letter) files
+export const loadAudio = () => {
+  const audios = { number: ['DUMMY'], letter: ['DUMMY'] };
+  let file = '';
+  for (let i = 1; i <= 9; i += 1) {
+    try {
+      file = `audio/number_${i}.mp3`;
+      const sound = new Howl({
+        src: [file],
+      });
+      audios.number.push(sound);
+    } catch (e) {
+      const { dialog } = remote;
+      dialog.showMessageBox({ type: 'error', message: `음성 파일 ${file} 로드에 실패했습니다.` });
+      window.close();
+    }
+  }
+
+  return audios;
 };
 
 // repr array for csv format

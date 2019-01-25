@@ -4,7 +4,7 @@
     <div id="titles">
       <h1 is="sui-header" id="title" textAlign="center" size="huge" color="blue">작업기억 검사</h1>
       <h1 is="sui-header" id="smalltitle" textAlign="center" size="huge">초등학생용</h1>
-      <MovePageButton :route="nextRoute" msg="시작" />
+      <MovePageButton :route="nextRoute" />
     </div>
   </div>
   
@@ -12,7 +12,8 @@
 
 <script>
   import MovePageButton from './BaseComponents/MovePageButton';
-  import { loadConfig, loadTestConfig } from '../utils/io';
+  import { loadConfig, loadTestConfig, loadAudio } from '../utils/io';
+  import { registerAudio } from '../utils/audio';
   import { EnterMoveListener } from '../utils/eventListeners';
 
   export default {
@@ -33,6 +34,9 @@
       const cfgFileName = 'WMCtest.cfg';
       const maxTests = 8;
       const cfg = loadConfig(cfgFileName, maxTests);
+      const audios = loadAudio();
+      registerAudio(audios);
+  
       window.$cookies.set('tests', cfg);
       window.$cookies.set('current-test-id', 1);
 
@@ -46,13 +50,6 @@
     },
   };
 </script>
-
-  // cursor: none;
-  // -moz-user-select: none;
-  // -khtml-user-select: none;
-  // -webkit-user-select: none;
-  // -ms-user-select: none;
-  // user-select: none;
 
 <style>
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
@@ -68,6 +65,8 @@
   #title { font-size: 6rem; }
   #smalltitle { font-size: 3rem; }
   #titles { margin: 20vh auto; }
+  #little-margin { margin: 8% auto; }
+  #tiny-margin { margin: 3% auto; }
   
 
   #wrapper {
@@ -148,7 +147,7 @@
     justify-content: flex-end;
     align-items: center;
     text-align: center;
-    padding-top: 3vh;
+    padding-top: 10%;
   }
 
   .center.container {
@@ -219,6 +218,13 @@
     font-size: 5vh;
   }
 
-
+  .hide-cursor {
+    cursor: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
 </style>

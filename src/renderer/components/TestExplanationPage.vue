@@ -9,8 +9,8 @@
           :key="msg"
           textAlign="left"
           size="huge"
+          v-html="msg"
         >
-          {{ msg }}
         </h1>
       </div>
       <MovePageButton :route="'/test/' + testId + '/practice'"/>

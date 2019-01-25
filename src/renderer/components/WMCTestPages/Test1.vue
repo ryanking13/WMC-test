@@ -50,6 +50,7 @@
 
 <script>
   import { isDigit } from '../../utils/inputCheck';
+  import { getAudio } from '../../utils/audio';
   import InvalidLabel from '../BaseComponents/InvalidLabel';
   export default {
     props: [
@@ -70,6 +71,8 @@
         userInput: '',
         userInputValid: true,
         invalidSubmit: false,
+
+        audio: getAudio().number,
       };
     },
     computed: {
@@ -86,6 +89,8 @@
         // if not visible, make it visible
         if (this.visible === false) {
           this.visible = true;
+  
+          if (typeof this.currentNumber !== 'undefined') this.audio[this.currentNumber].play();
           // TODO: play audio
           setTimeout(() => {
             this.changeNumbers(c);
@@ -94,9 +99,9 @@
           // if visible, change number, and make it invisible
           this.visible = false;
           setTimeout(() => {
-            this.currentIndex += 1;
             if (c > 0) {
               c -= 1;
+              this.currentIndex += 1;
               this.changeNumbers(c);
             } else {
               this.onTest = false;
