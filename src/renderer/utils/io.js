@@ -1,6 +1,7 @@
 import { remote } from 'electron';
 import { Howl } from 'howler';
 import iconv from 'iconv-lite';
+import path from 'path';
 import { isDigitStrict } from './inputCheck';
 import { pad1 } from './conversions';
 
@@ -55,6 +56,7 @@ export const loadTestConfig = (testId) => {
       window.close();
     }
   }
+  console.log(f);
 
   let cfg;
   try {
@@ -75,7 +77,8 @@ export const loadAudio = () => {
   let file = '';
   for (let i = 1; i <= 9; i += 1) {
     try {
-      file = `audio/number_${i}.mp3`;
+      file = path.join(__static, `/audio/number_${i}.mp3`);
+      // file = `audio/number_${i}.mp3`;
       const sound = new Howl({
         src: [file],
       });

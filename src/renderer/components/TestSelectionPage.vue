@@ -23,6 +23,7 @@
 
 <script>
 import MovePageButton from './BaseComponents/MovePageButton';
+import { getState } from '../utils/state';
 
 export default {
   name: 'test-selection-page',
@@ -61,10 +62,12 @@ export default {
     },
   },
   created() {
-    this.tests = window.$cookies.get('tests').tests;
+    // this.tests = window.$cookies.get('tests').tests;
+    this.tests = getState('tests').tests;
 
     // check if finished all test
-    const id = parseInt(window.$cookies.get('current-test-id'), 10);
+    // const id = parseInt(window.$cookies.get('current-test-id'), 10);
+    const id = parseInt(getState('current-test-id'), 10);
     if (id > this.tests.length) {
       this.$router.push('/end');
     }

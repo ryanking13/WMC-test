@@ -39,6 +39,7 @@
 <script>
   import Test1 from './WMCTestPages/Test1';
   import { toDate, toTime, timeDiff } from '../utils/conversions';
+  import { getState, setState } from '../utils/state';
 
   export default {
     props: {
@@ -160,15 +161,19 @@
       },
       finishTest() {
         const testEndTime = toTime(new Date());
-        const currentTestId = window.$cookies.get('current-test-id');
+        // const currentTestId = window.$cookies.get('current-test-id');
+        const currentTestId = getState('current-test-id');
         const nextTestId = currentTestId + 1;
-        const testResult = window.$cookies.get('test-result');
+        // const testResult = window.$cookies.get('test-result');
+        const testResult = getState('test-result');
         // test end time is calculated after all trials are ended
         const trialResults = this.trialResults.map((e) => { e.testEndTime = testEndTime; return e; });
 
         testResult[this.cfg.id] = trialResults;
-        window.$cookies.set('test-result', testResult);
-        window.$cookies.set('current-test-id', nextTestId);
+        // window.$cookies.set('test-result', testResult);
+        setState('test-result', testResult);
+        // window.$cookies.set('current-test-id', nextTestId);
+        setState('current-test-id', nextTestId);
         this.$router.push('/test-selection');
       },
     },

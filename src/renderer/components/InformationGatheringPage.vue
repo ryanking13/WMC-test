@@ -107,7 +107,8 @@
 <script>
   import MovePageButton from './BaseComponents/MovePageButton';
   import InvalidLabel from './BaseComponents/InvalidLabel';
-  import { isDigit, isKorean } from '../utils/inputCheck.js';
+  import { isDigit, isKorean } from '../utils/inputCheck';
+  import { setState } from '../utils/state';
 
   export default {
     name: 'information-gathering-page',
@@ -234,7 +235,8 @@
         userCookie.number = (this.numberInput.length === 2) ? this.numberInput : `0${this.numberInput}`;
         userCookie.name = this.nameInput;
         userCookie.sex = (this.sexButtonMaleOn) ? 'M' : 'F';
-        window.$cookies.set('user', userCookie);
+        // window.$cookies.set('user', userCookie);
+        setState('user', userCookie);
       },
       blockEnter(e) {
         if (e) e.preventDefault();

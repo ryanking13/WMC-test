@@ -22,7 +22,12 @@ function createWindow() {
     useContentSize: true,
     width: 1600,
     fullscreen: true,
+    webPreferences: {
+      webSecurity: false,
+    },
   });
+
+  mainWindow.webContents.openDevTools();
 
   mainWindow.loadURL(winURL);
 

@@ -20,6 +20,7 @@
 
 <script>
   import MovePageButton from './BaseComponents/MovePageButton';
+  import { getState } from '../utils/state';
 
   export default {
     props: {
@@ -37,7 +38,8 @@
       };
     },
     created() {
-      const cfg = window.$cookies.get(`test${this.id}-config`);
+      // const cfg = window.$cookies.get(`test${this.id}-config`);
+      const cfg = getState(`test${this.id}-config`);
       this.testId = this.id;
       this.title = cfg.testTitle;
       this.msgs = cfg.explanationMessages;

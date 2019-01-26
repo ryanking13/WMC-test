@@ -13,6 +13,7 @@
 <script>
   import MovePageButton from './BaseComponents/MovePageButton';
   import { saveResult } from '../utils/io';
+  import { getState } from '../utils/state';
 
   export default {
     name: 'outro-page',
@@ -20,8 +21,10 @@
     methods: {
     },
     created() {
-      const user = window.$cookies.get('user');
-      const result = window.$cookies.get('test-result');
+      // const user = window.$cookies.get('user');
+      // const result = window.$cookies.get('test-result');
+      const user = getState('user');
+      const result = getState('test-result');
       saveResult(user, result);
     },
   };

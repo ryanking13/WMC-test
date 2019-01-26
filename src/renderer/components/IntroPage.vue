@@ -15,6 +15,7 @@
   import { loadConfig, loadTestConfig, loadAudio } from '../utils/io';
   import { registerAudio } from '../utils/audio';
   import { EnterMoveListener } from '../utils/eventListeners';
+  import { setState } from '../utils/state';
 
   export default {
     name: 'intro-page',
@@ -28,6 +29,7 @@
     methods: {
     },
     created() {
+      // window.openDevTools();
       this.enterListener = EnterMoveListener('keyup', this.$router, this.nextRoute);
       window.addEventListener('keyup', this.enterListener);
 
@@ -36,13 +38,20 @@
       const cfg = loadConfig(cfgFileName, maxTests);
       const audios = loadAudio();
       registerAudio(audios);
-  
-      window.$cookies.set('tests', cfg);
-      window.$cookies.set('current-test-id', 1);
+
+      // window.$cookies.set('user', '{}');
+      // window.$cookies.set('test-result', '{}');
+      // window.$cookies.set('tests', cfg);
+      // window.$cookies.set('current-test-id', 1);
+      setState('user', {});
+      setState('test-result', {});
+      setState('tests', cfg);
+      setState('current-test-id', 1);
 
       for (let i = 1; i <= 1; i += 1) {
         const cfg = loadTestConfig(i);
-        window.$cookies.set(`test${i}-config`, cfg);
+        // window.$cookies.set(`test${i}-config`, cfg);
+        setState(`test${i}-config`, cfg);
       }
     },
     beforeDestroy() {
