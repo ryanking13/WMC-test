@@ -91,7 +91,8 @@
       },
     },
     created() {
-      this.cfg = window.$cookies.get(`test${this.id}-config`);
+      // this.cfg = window.$cookies.get(`test${this.id}-config`);
+      this.cfg = getState(`test${this.id}-config`);
       this.testId = this.id;
       this.testType = this.type;
       if (this.testType === 'practice') {

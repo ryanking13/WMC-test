@@ -39,7 +39,7 @@ export const loadConfig = (cfgFileName, maxTests) => {
 
 export const loadTestConfig = (testId) => {
   const fs = require('fs');
-  const cfgFileName = `Test${testId}cfg.json`;
+  const cfgFileName = path.join(__static, `config/Test${testId}cfg.json`);
   let f;
 
   // try both EUC-KR and UTF-8 encoding

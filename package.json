@@ -19,6 +19,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
+    "asar": false,
     "productName": "wmctest",
     "appId": "com.ryanking13.wmctest",
     "directories": {
