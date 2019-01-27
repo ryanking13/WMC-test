@@ -81,7 +81,6 @@
     },
     computed: {
       currentNumber() {
-        this.onTest = true;
         return this.numbers[this.currentIndex];
       },
       userInputInvalidLabelOn() {
@@ -126,6 +125,7 @@
           // submit user input
           const userInputArray = this.userInput.toString(10).split('');
           this.handleSubmit(userInputArray.map(e => parseInt(e, 10)));
+          this.onTest = true;
         }
       },
       focusInput(e) { // focus to input element if other element is clicked
@@ -141,7 +141,10 @@
         immediate: true,
         handler() {
           this.currentIndex = -1;
-          this.changeNumbers(this.numbers.length);
+          this.onTest = true;
+          setTimeout(() => {
+            this.changeNumbers(this.numbers.length);
+          }, this.interval);
         },
       },
       answer: {

@@ -176,7 +176,9 @@
       },
       finishTest() {
         if (this.testType === 'practice') {
-          this.$router.push(`/test-end-practice/${this.testId}`);
+          setTimeout(() => {
+            this.$router.push(`/test-end-practice/${this.testId}`);
+          }, this.interval);
         } else {
           const testEndTime = toTime(new Date());
           // const currentTestId = window.$cookies.get('current-test-id');
@@ -196,7 +198,10 @@
           setState('test-result', testResult);
           // window.$cookies.set('current-test-id', nextTestId);
           setState('current-test-id', nextTestId);
-          this.$router.push('/test-selection');
+
+          setTimeout(() => {
+            this.$router.push('/test-selection');
+          }, this.interval);
         }
       },
     },
