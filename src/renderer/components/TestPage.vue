@@ -1,5 +1,5 @@
 <template>
-  <div id="wrapper" class="hide-cursor">
+  <div id="wrapper" :class="cursor">
     <sui-grid textAlign="center">
       <sui-grid-row :columns='3'>
         <sui-grid-column>
@@ -46,12 +46,22 @@
       :handleSubmit="handleSubmit"
       :practice="testType === 'practice'"
     />
+    <Test3
+      v-if="testId === '3'"
+      :numbers="currentTrial"
+      :answer="currentAnswer"
+      :interval="interval"
+      :hideInterval="hideInterval"
+      :handleSubmit="handleSubmit"
+      :practice="testType === 'practice'"
+    />
   </div>
 </template>
 
 <script>
   import Test1 from './WMCTestPages/Test1';
   import Test2 from './WMCTestPages/Test2';
+  import Test3 from './WMCTestPages/Test3';
   import { toDate, toTime, timeDiff } from '../utils/conversions';
   import { getState, setState } from '../utils/state';
 
@@ -65,7 +75,7 @@
       },
     },
     components: {
-      Test1, Test2,
+      Test1, Test2, Test3,
     },
     data() {
       return {
@@ -82,6 +92,7 @@
         failCount: 0,
         matches: [],
         trialResults: [],
+        hideCursor: false,
 
         cfg: null,
         testStartTime: null,
@@ -104,6 +115,14 @@
       currentAnswer() {
         return this.answers[this.currentTrialIndex - 1];
       },
+      cursor() {
+        if (this.hideCursor === true) {
+          return {
+            'hide-cursor': true,
+          };
+        }
+        return {};
+      },
     },
     created() {
       // this.cfg = window.$cookies.get(`test${this.id}-config`);
@@ -123,6 +142,7 @@
       this.currentTrialIndex = 1;
       this.interval = this.cfg.interval;
       this.hideInterval = this.cfg.hideInterval;
+      this.hideCursor = this.cfg.hideCursor;
       this.testStartTime = new Date();
       this.trialStartTime = new Date();
     },
