@@ -56,7 +56,6 @@ export const loadTestConfig = (testId) => {
       window.close();
     }
   }
-  console.log(f);
 
   let cfg;
   try {

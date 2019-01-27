@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      currentTestId: 1,
+      currentTestId: 0,
       tests: [],
       testButtons: [
         { id: 1, key: 'test1', name: '검사1' },
@@ -68,10 +68,10 @@ export default {
     // check if finished all test
     // const id = parseInt(window.$cookies.get('current-test-id'), 10);
     const id = parseInt(getState('current-test-id'), 10);
-    if (id > this.tests.length) {
+    if (id >= this.tests.length) {
       this.$router.push('/end');
     }
-    this.currentTestId = id;
+    this.currentTestId = this.tests[id];
   },
 };
 </script>

@@ -1,7 +1,15 @@
 <template>
   <div id="wrapper">
     <div id="titlesnomargin">
-      <h1 is="sui-header" id="title" textAlign="center" size="huge" color="blue">{{ title }}</h1>
+      <h1
+        is="sui-header"
+        id="title"
+        textAlign="center"
+        size="huge"
+        color="blue"
+        v-html="title"
+      >
+      </h1>
       <div class="center container wide">
         <h1
           is="sui-header"

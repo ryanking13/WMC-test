@@ -18,7 +18,7 @@
           size="massive"
           textAlign="center"
         >
-          본 순서대로 수를 입력하고 Enter를 누르세요.
+        <span style="color: red">역순(반대순서)</span>로 수를 입력하고 Enter를 누르세요.
         </h1>
       </div>
     </div>
@@ -98,7 +98,7 @@
           // TODO: play audio
           setTimeout(() => {
             this.changeNumbers(c);
-          }, this.interval);
+          }, this.hideInterval);
         } else {
           // if visible, change number, and make it invisible
           this.visible = false;
@@ -113,7 +113,7 @@
                 this.$refs.inp.focus();
               });
             }
-          }, this.hideInterval);
+          }, this.invisibleInterval);
         }
       },
       submit(e) {

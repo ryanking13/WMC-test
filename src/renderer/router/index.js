@@ -27,6 +27,12 @@ export default new Router({
       props: true,
     },
     {
+      path: '/test-end-practice/:id',
+      name: 'Test-practice-ended-page',
+      component: require('@/components/TestEndPracticePage').default,
+      props: true,
+    },
+    {
       path: '/test/:id/:type',
       name: 'Test-page',
       component: require('@/components/TestPage').default,

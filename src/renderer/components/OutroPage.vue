@@ -4,7 +4,16 @@
     <div id="titles">
       <h1 is="sui-header" id="title" textAlign="center" size="huge" color="blue">작업기억 검사가 모두 끝났습니다.</h1>
       <h1 is="sui-header" textAlign="center" size="huge">수고 많으셨습니다.</h1>
-      <MovePageButton route="/" msg="검사 종료"/>
+      <div class="button container">
+        <sui-button
+          color="black"
+          size="huge"
+          @click="onClick"
+          :disabled="!canClose"
+        >
+          검사 종료
+        </sui-button>
+      </div>
     </div>
   </div>
   
@@ -18,7 +27,10 @@
   export default {
     name: 'outro-page',
     components: { MovePageButton },
-    methods: {
+    data() {
+      return {
+        canClose: false,
+      };
     },
     created() {
       // const user = window.$cookies.get('user');
@@ -26,6 +38,12 @@
       const user = getState('user');
       const result = getState('test-result');
       saveResult(user, result);
+      this.canClose = true;
+    },
+    methods: {
+      onClick() {
+        window.close();
+      },
     },
   };
 </script>

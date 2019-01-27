@@ -46,9 +46,9 @@
       setState('user', {});
       setState('test-result', {});
       setState('tests', cfg);
-      setState('current-test-id', 1);
+      setState('current-test-id', 0);
 
-      for (let i = 1; i <= 1; i += 1) {
+      for (let i = 1; i <= 2; i += 1) {
         const cfg = loadTestConfig(i);
         // window.$cookies.set(`test${i}-config`, cfg);
         setState(`test${i}-config`, cfg);
@@ -76,6 +76,11 @@
   #titles { margin: 20vh auto; }
   #little-margin { margin: 8% auto; }
   #tiny-margin { margin: 3% auto; }
+  #little-margin-all {
+    margin-top: 10%;
+    margin-left: 4%;
+    margin-right: 4%;
+  }
   
 
   #wrapper {
@@ -195,6 +200,15 @@
 
   .centered-input {
     text-align: center;
+  }
+
+  .centered-box {
+    display: block;
+    height: 50%;
+    width: 50%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;   
   }
 
   

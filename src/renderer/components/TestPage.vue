@@ -29,15 +29,29 @@
     </sui-grid>
 
     <Test1
+      v-if="testId === '1'"
       :numbers="currentTrial"
+      :answer="currentAnswer"
       :interval="interval"
+      :hideInterval="hideInterval"
       :handleSubmit="handleSubmit"
+      :practice="testType === 'practice'"
+    />
+    <Test2
+      v-if="testId === '2'"
+      :numbers="currentTrial"
+      :answer="currentAnswer"
+      :interval="interval"
+      :hideInterval="hideInterval"
+      :handleSubmit="handleSubmit"
+      :practice="testType === 'practice'"
     />
   </div>
 </template>
 
 <script>
   import Test1 from './WMCTestPages/Test1';
+  import Test2 from './WMCTestPages/Test2';
   import { toDate, toTime, timeDiff } from '../utils/conversions';
   import { getState, setState } from '../utils/state';
 
@@ -51,7 +65,7 @@
       },
     },
     components: {
-      Test1,
+      Test1, Test2,
     },
     data() {
       return {
@@ -64,6 +78,7 @@
         currentTrialIndex: 0,
         inputs: [],
         interval: 1000,
+        hideInterval: 300,
         failCount: 0,
         matches: [],
         trialResults: [],
@@ -107,6 +122,7 @@
       this.trialsCount = this.trials.length;
       this.currentTrialIndex = 1;
       this.interval = this.cfg.interval;
+      this.hideInterval = this.cfg.hideInterval;
       this.testStartTime = new Date();
       this.trialStartTime = new Date();
     },
@@ -117,28 +133,26 @@
 
         // if it is real trial and every answer is wrong
         this.$nextTick(() => {
+          const r = this.formatTrialResult();
+          this.trialResults.push(r);
+
           if (this.testType !== 'practice' && this.matches.every(e => e === 0)) {
             this.failCount += 1;
-            // if 3 consecutive fails, end test
-            if (this.failCount === 3) {
-              const r = this.formatTrialResult();
-              this.trialResults.push(r);
-              this.finishTest();
-            }
           } else {
             this.failCount = 0;
           }
-        });
 
-        const r = this.formatTrialResult();
-        this.trialResults.push(r);
-        // if trial is left, go to next trial
-        if (this.currentTrialIndex < this.trialsCount) {
-          this.currentTrialIndex += 1;
-          this.trialStartTime = new Date();
-        } else {
-          this.finishTest();
-        }
+          // if 3 consecutive fails, end test
+          if (this.failCount === 3) {
+            this.finishTest();
+          } else if (this.currentTrialIndex < this.trialsCount) {
+            // if trial is left, go to next trial
+            this.trialStartTime = new Date();
+            this.currentTrialIndex += 1;
+          } else {
+            this.finishTest();
+          }
+        });
       },
       formatTrialResult() {
         this.trialEndTime = new Date();
@@ -148,7 +162,7 @@
         result.testDate = toDate(this.testStartTime);
         result.testStartTime = toTime(this.testStartTime);
         result.trialNo = this.currentTrialIndex;
-        result.trialQuestion = this.currentTrial.map(e => e);
+        result.trialQuestion = this.currentAnswer.map(e => e);
         result.trialResponse = this.inputs.map(e => e);
         result.trialLoad = result.trialQuestion.length;
         result.anuPoints = this.matches.every(e => e === 1) ? 1 : 0;
@@ -161,21 +175,29 @@
         return result;
       },
       finishTest() {
-        const testEndTime = toTime(new Date());
-        // const currentTestId = window.$cookies.get('current-test-id');
-        const currentTestId = getState('current-test-id');
-        const nextTestId = currentTestId + 1;
-        // const testResult = window.$cookies.get('test-result');
-        const testResult = getState('test-result');
-        // test end time is calculated after all trials are ended
-        const trialResults = this.trialResults.map((e) => { e.testEndTime = testEndTime; return e; });
+        if (this.testType === 'practice') {
+          this.$router.push(`/test-end-practice/${this.testId}`);
+        } else {
+          const testEndTime = toTime(new Date());
+          // const currentTestId = window.$cookies.get('current-test-id');
+          const currentTestId = getState('current-test-id');
+          const nextTestId = currentTestId + 1;
+          // const testResult = window.$cookies.get('test-result');
+          const testResult = getState('test-result');
+          // test end time is calculated after all trials are ended
+          const trialResults = this.trialResults.map((e) => {
+            e.testEndTime = testEndTime;
+            return e;
+          });
 
-        testResult[this.cfg.id] = trialResults;
-        // window.$cookies.set('test-result', testResult);
-        setState('test-result', testResult);
-        // window.$cookies.set('current-test-id', nextTestId);
-        setState('current-test-id', nextTestId);
-        this.$router.push('/test-selection');
+          testResult[this.cfg.id] = trialResults;
+  
+          // window.$cookies.set('test-result', testResult);
+          setState('test-result', testResult);
+          // window.$cookies.set('current-test-id', nextTestId);
+          setState('current-test-id', nextTestId);
+          this.$router.push('/test-selection');
+        }
       },
     },
   };
