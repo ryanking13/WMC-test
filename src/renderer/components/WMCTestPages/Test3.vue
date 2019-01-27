@@ -112,7 +112,8 @@
         return true;
       },
       userInputClick(r, c) {
-        if (this.userInput.indexOf(this.rc2idx(r, c)) === -1) {
+        if (this.userInput.length < this.numbers.length &&
+            this.userInput.indexOf(this.rc2idx(r, c)) === -1) {
           this.userInput = this.userInput.concat(this.rc2idx(r, c));
         }
       },
@@ -136,7 +137,10 @@
           this.invalidSubmit = true;
         } else {
           // submit user input
-          this.handleSubmit(this.userInput);
+          // wait for interval to show input to user
+          setTimeout(() => {
+            this.handleSubmit(this.userInput);
+          }, this.interval);
           // this.onTest = true;
         }
       },
@@ -166,9 +170,7 @@
         immediate: true,
         handler() {
           if (this.userInput.length === this.numbers.length) {
-            setTimeout(() => {
-              this.submit();
-            }, this.interval);
+            this.submit();
           }
         },
       },
