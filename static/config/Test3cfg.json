@@ -11,7 +11,7 @@
     ],
     "inputExplanationMessage": "",
     "interval": 1000,
-    "hideInterval": 300,
+    "hideInterval": 0,
     "hideCursor": false,
     "practiceQuestions": [
         [4, 10],

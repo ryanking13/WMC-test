@@ -57,6 +57,15 @@
       :handleSubmit="handleSubmit"
       :practice="testType === 'practice'"
     />
+    <Test4
+      v-if="testId === '4'"
+      :numbers="currentTrial"
+      :answer="currentAnswer"
+      :interval="interval"
+      :hideInterval="hideInterval"
+      :handleSubmit="handleSubmit"
+      :practice="testType === 'practice'"
+    />
   </div>
 </template>
 
@@ -64,6 +73,7 @@
   import Test1 from './WMCTestPages/Test1';
   import Test2 from './WMCTestPages/Test2';
   import Test3 from './WMCTestPages/Test3';
+  import Test4 from './WMCTestPages/Test4';
   import { toDate, toTime, timeDiff } from '../utils/conversions';
   import { getState, setState } from '../utils/state';
 
@@ -77,7 +87,7 @@
       },
     },
     components: {
-      Test1, Test2, Test3,
+      Test1, Test2, Test3, Test4,
     },
     data() {
       return {

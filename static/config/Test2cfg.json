@@ -12,7 +12,7 @@
     ],
     "inputExplanationMessage": "<span style='color: red'>역순(반대순서)</span>로 수를 입력하고 Enter를 누르세요.",
     "interval": 1000,
-    "hideInterval": 300,
+    "hideInterval": 0,
     "hideCursor": true,
     "practiceQuestions": [
         [7, 1],
