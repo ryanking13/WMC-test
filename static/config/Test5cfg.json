@@ -1,0 +1,209 @@
+{
+    "id": "test5",
+    "name": "Reading",
+    "testTitle": "숫자 기억하기2",
+    "trialUnit": "숫자",
+    "explanationMessages": [
+        "<span style='color: red'>숫자가 1초간 나타난 후</span> 제시된 문장을 읽고, 맞으면 (icon), 틀리면 (icon) 자판을 키보드에서 누르세요.",
+        "혹시 답을 모르겠더라도 추측을 해서 가능한 빨리 답해주세요.",
+        "답을 하면 문장이 사라지고, <span style='color: red'>또 숫자 하나가 1초간 나타납니다.</span> 이 숫자를 잘 기억해두었다가 답을 입력해야 합니다.",
+        "세 문항 연속해서 틀리면 검사가 종료됩니다.",
+        "검사를 진행하려면 다음 버튼을 클릭해주세요."
+    ],
+    "inputExplanationMessage": "본 순서대로 수를 입력하고 Enter를 누르세요.",
+    "interval": 1000,
+    "hideInterval": 0,
+    "hideCursor": true,
+    "practiceQuestions": [
+        {
+            "number": [2, 9],
+            "sentence": [
+                "시계는 시간을 알려준다.",
+                "물고기는 하늘을 날아다닌다."
+            ]
+        },
+        {
+            "number": [5, 7],
+            "sentence": [
+                "사자는 풀을 먹고 산다.",
+                "개미는 땅 속에 집을 짓는다."
+            ]
+        },
+        {
+            "number": [8, 4, 1],
+            "sentence": [
+                "벌은 꽃에서 꿀을 먹는다.",
+                "거미의 다리는 8개이다.",
+                "새들은 바다 속에서 산다."
+            ]
+        }
+    ],
+    "practiceQuestionsAnswers": [
+        {
+            "number": [2, 9],
+            "sentence": [true, false]
+        },
+        {
+            "number": [5, 7],
+            "sentence": [false, true]
+        },
+        {
+            "number": [8, 4, 1],
+            "sentence": [true, true, false]
+        }
+    ],
+    "questions": [
+        {
+            "number": [6, 3],
+            "sentence": [
+                "호박은 나무 위에서 열린다.",
+                "비행기는 하늘 위를 난다."
+            ]
+        },
+        {
+            "number": [1, 7],
+            "sentence": [
+                "자동차는 도로 위를 달린다.",
+                "양말은 손에 신는 것이다."
+            ]
+        },
+        {
+            "number": [9, 5],
+            "sentence": [
+                "염소의 배에 뿔이 달렸다.",
+                "의자는 앉을 때 사용한다."
+            ]
+        },
+        {
+            "number": [2, 6, 8],
+            "sentence": [
+                "자동차에는 바퀴가 있다.",
+                "오리는 강에 사는 물고기이다.",
+                "병아리의 다리는 4개이다."
+            ]
+        },
+        {
+            "number": [3, 9, 7],
+            "sentence": [
+                "연필로 글씨를 쓴다.",
+                "단풍잎은 여름에 색이 변한다.",
+                "축구는 손으로 하는 운동이다."
+            ]
+        },
+        {
+            "number": [4, 2, 1],
+            "sentence": [
+                "모자는 목에 감는 것이다.",
+                "거북이는 등이 단단하다.",
+                "은행은 저금하는 곳이다."
+            ]
+        },
+        {
+            "number": [5, 6, 3, 1],
+            "sentence": [
+                "제비는 벌레를 잡아먹는다.",
+                "토끼는 귀가 짧은 동물이다.",
+                "개나리꽃은 빨갛다.",
+                "추석에는 송편을 먹는다."
+            ]
+        },
+        {
+            "number": [6, 4, 2, 9],
+            "sentence": [
+                "학생은 가르치는 사람이다.",
+                "눈은 여름에 주로 내린다.",
+                "보름달은 밤에 볼 수 있다.",
+                "달팽이는 느리게 움직인다."
+            ]
+        },
+        {
+            "number": [7, 5, 1, 8],
+            "sentence": [
+                "기린은 목이 길다.",
+                "사다리로 나무를 자른다.",
+                "지우개로 글씨를 지운다.",
+                "봄이면 나뭇잎이 떨어진다."
+            ]
+        },
+        {
+            "number": [4, 3, 6, 9, 2],
+            "sentence": [
+                "나사를 조일 때 망치를 쓴다.",
+                "숟가락으로 밥을 먹는다.",
+                "여름에는 날씨가 덥다.",
+                "피구는 발로 하는 운동이다.",
+                "달리기를 할 땐 부츠를 신는다."
+            ]
+        },
+        {
+            "number": [1, 8, 7, 6, 5],
+            "sentence": [
+                "식사 후에 양치질을 한다.",
+                "핸드폰으로 전화를 한다.",
+                "눈이 나쁘면 안경을 쓴다.",
+                "젓가락으로 국물을 먹는다.",
+                "한겨울에 반팔을 입는다."
+            ]
+        },
+        {
+            "number": [9, 3, 7, 1, 8],
+            "sentence": [
+                "잘 때는 불을 켠다.",
+                "컵으로 물을 마신다.",
+                "젤리는 말랑말랑하다.",
+                "종이의 원료는 고무이다.",
+                "수영장에서 코트를 입는다."
+            ]
+        }
+    ],
+    "questionsAnswers": [
+        {
+            "number": [6, 3],
+            "sentence": [false, true]
+        },
+        {
+            "number": [1, 7],
+            "sentence": [true, false]
+        },
+        {
+            "number": [9, 5],
+            "sentence": [false, true]
+        },
+        {
+            "number": [2, 6, 8],
+            "sentence": [true, false, false]
+        },
+        {
+            "number": [3, 9, 7],
+            "sentence": [true, false, false]
+        },
+        {
+            "number": [4, 2, 1],
+            "sentence": [false, true, true]
+        },
+        {
+            "number": [5, 6, 3, 1],
+            "sentence": [true, false, false, true]
+        },
+        {
+            "number": [6, 4, 2, 9],
+            "sentence": [false, false, true, true]
+        },
+        {
+            "number": [7, 5, 1, 8],
+            "sentence": [true, false, true, false]
+        },
+        {
+            "number": [4, 3, 6, 9, 2],
+            "sentence": [false, true, true, false, false]
+        },
+        {
+            "number": [1, 8, 7, 6, 5],
+            "sentence": [true, true, true, false, false]
+        },
+        {
+            "number": [9, 3, 7, 1, 8],
+            "sentence": [false, true, true, false, false]
+        }
+    ]
+}

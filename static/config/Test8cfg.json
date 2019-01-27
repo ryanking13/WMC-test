@@ -1,0 +1,169 @@
+{
+    "id": "test8",
+    "name": "Symmetry",
+    "testTitle": "색이 변한 칸 기억하기2",
+    "trialUnit": "칸의",
+    "explanationMessages": [
+        "색이 변하는 칸이 1초간 보이고, 이후 나타난 그림이 <span style='color: red'>대칭인지 아닌지</span> 판단하는 과제입니다. 대칭이면 (icon), 대칭이 아니면 (icon) 자판을 키보드에서 누르세요."
+        "색이 변하는 칸을 기억했다가 순서대로 클릭하세요.",
+        "색이 변하는 칸의 개수는 점차 늘어납니다.",
+        "세 번 연속 틀리면 검사가 종료됩니다.",
+        "검사를 진행하려면 다음 버튼을 클릭해주세요."
+    ],
+    "inputExplanationMessage": "",
+    "interval": 1000,
+    "hideInterval": 0,
+    "hideCursor": false,
+    "practiceQuestions": [
+        {
+            "matrix": [10, 4],
+            "image": ["practice1-1.png", "practice1-2.png"] 
+        },
+        {
+            "matrix": [9, 16],
+            "image": ["practice2-1.png", "practice2-2.png"] 
+        },
+        {
+            "matrix": [1, 11, 8],
+            "image": ["practice3-1.png", "practice3-2.png", "practice3-3.png"] 
+        }
+    ],
+    "practiceQuestionsAnswers": [
+        {
+            "matrix": [10, 4],
+            "image": [false, false] 
+        },
+        {
+            "matrix": [9, 16],
+            "image": [true, true] 
+        },
+        {
+            "matrix": [1, 11, 8],
+            "image": [true, false, false] 
+        }
+    ],
+    "questions": [
+        {
+            "matrix": [15, 3],
+            "image": ["1-1.png", "1-2.png"]
+        },
+        {
+            "matrix": [14, 8],
+            "image": ["2-1.png", "2-2.png"]
+        },
+        {
+            "matrix": [6, 14],
+            "image": ["3-1.png", "3-2.png"]
+        },
+        {
+            "matrix": [6, 1, 4],
+            "image": ["4-1.png", "4-2.png", "4-3.png"]
+        },
+        {
+            "matrix": [12, 7, 9],
+            "image": ["5-1.png", "5-2.png", "5-3.png"]
+        },
+        {
+            "matrix": [5, 8, 14],
+            "image": ["6-1.png", "6-2.png", "6-3.png"]
+        },
+        {
+            "matrix": [10, 3, 2, 13],
+            "image": ["7-1.png", "7-2.png", "7-3.png", "7-4.png"]
+        },
+        {
+            "matrix": [4, 13, 6, 10],
+            "image": ["8-1.png", "8-2.png", "8-3.png", "8-4.png"]
+        },
+        {
+            "matrix": [2, 12, 9, 15],
+            "image": ["9-1.png", "9-2.png", "9-3.png", "9-4.png"]
+        },
+        {
+            "matrix": [2, 5, 13, 6, 9],
+            "image": ["10-1.png", "10-2.png", "10-3.png", "10-4.png", "10-5.png"]
+        },
+        {
+            "matrix": [8, 3, 12, 15, 9],
+            "image": ["11-1.png", "11-2.png", "11-3.png", "11-4.png", "11-5.png"]
+        },
+        {
+            "matrix": [7, 2, 14, 1, 16],
+            "image": ["12-1.png", "12-2.png", "12-3.png", "12-4.png", "12-5.png"]
+        },
+        {
+            "matrix": [3, 2, 14, 7, 10, 8],
+            "image": ["13-1.png", "13-2.png", "13-3.png", "13-4.png", "13-5.png", "13-6.png"]
+        },
+        {
+            "matrix": [16, 7, 15, 1, 9, 4],
+            "image": ["14-1.png", "14-2.png", "14-3.png", "14-4.png", "14-5.png", "14-6.png"]
+        },
+        {
+            "matrix": [14, 12, 5, 10, 6, 13],
+            "image": ["15-1.png", "15-2.png", "15-3.png", "15-4.png", "15-5.png", "15-6.png"]
+        }
+    ],
+    "questionsAnswers": [
+        {
+            "matrix": [15, 3],
+            "image": [false, true]
+        },
+        {
+            "matrix": [14, 8],
+            "image": [true, false]
+        },
+        {
+            "matrix": [6, 14],
+            "image": [false, false]
+        },
+        {
+            "matrix": [6, 1, 4],
+            "image": [false, false, false]
+        },
+        {
+            "matrix": [12, 7, 9],
+            "image": [true, false, false]
+        },
+        {
+            "matrix": [5, 8, 14],
+            "image": [true, true, true]
+        },
+        {
+            "matrix": [10, 3, 2, 13],
+            "image": [false, true, false, false]
+        },
+        {
+            "matrix": [4, 13, 6, 10],
+            "image": [false, true, true, false]
+        },
+        {
+            "matrix": [2, 12, 9, 15],
+            "image": [true, true, false, false]
+        },
+        {
+            "matrix": [2, 5, 13, 6, 9],
+            "image": [false, true, false, false, true]
+        },
+        {
+            "matrix": [8, 3, 12, 15, 9],
+            "image": [true, false, false, false, false]
+        },
+        {
+            "matrix": [7, 2, 14, 1, 16],
+            "image": [false, false, true, false, false]
+        },
+        {
+            "matrix": [3, 2, 14, 7, 10, 8],
+            "image": [false, true, true, true, true, false]
+        },
+        {
+            "matrix": [16, 7, 15, 1, 9, 4],
+            "image": [true, false, false, true, false, true]
+        },
+        {
+            "matrix": [14, 12, 5, 10, 6, 13],
+            "image": [true, true, false, false, false, true]
+        }
+    ]
+}
