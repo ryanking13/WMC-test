@@ -36,6 +36,7 @@
       :hideInterval="hideInterval"
       :handleSubmit="handleSubmit"
       :practice="testType === 'practice'"
+      :message="inputExplanationMessage"
     />
     <Test2
       v-if="testId === '2'"
@@ -45,6 +46,7 @@
       :hideInterval="hideInterval"
       :handleSubmit="handleSubmit"
       :practice="testType === 'practice'"
+      :message="inputExplanationMessage"
     />
     <Test3
       v-if="testId === '3'"
@@ -143,6 +145,7 @@
       this.interval = this.cfg.interval;
       this.hideInterval = this.cfg.hideInterval;
       this.hideCursor = this.cfg.hideCursor;
+      this.inputExplanationMessage = this.cfg.inputExplanationMessage;
       this.testStartTime = new Date();
       this.trialStartTime = new Date();
     },

@@ -17,8 +17,8 @@
           is="sui-header"
           size="massive"
           textAlign="center"
+          v-html="message"
         >
-          본 순서대로 수를 입력하고 Enter를 누르세요.
         </h1>
       </div>
     </div>
@@ -61,6 +61,7 @@
       'hideInterval',
       'handleSubmit',
       'practice',
+      'message',
     ],
     components: {
       InvalidLabel,

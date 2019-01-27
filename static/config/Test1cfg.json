@@ -10,6 +10,7 @@
         "세 번 연속 틀리면 검사가 종료됩니다.",
         "검사를 진행하려면 다음 버튼을 클릭해주세요."
     ],
+    "inputExplanationMessage": "본 순서대로 수를 입력하고 Enter를 누르세요.",
     "interval": 1000,
     "hideInterval": 0,
     "hideCursor": true,

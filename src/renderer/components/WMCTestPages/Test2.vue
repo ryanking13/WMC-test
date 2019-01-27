@@ -17,8 +17,8 @@
           is="sui-header"
           size="massive"
           textAlign="center"
+          v-html="message"
         >
-        <span style="color: red">역순(반대순서)</span>로 수를 입력하고 Enter를 누르세요.
         </h1>
       </div>
     </div>
@@ -61,6 +61,7 @@
       'hideInterval',
       'handleSubmit',
       'practice',
+      'message',
     ],
     components: {
       InvalidLabel,
@@ -81,6 +82,7 @@
     },
     computed: {
       currentNumber() {
+        // this.onTest = true;
         return this.numbers[this.currentIndex];
       },
       userInputInvalidLabelOn() {
@@ -97,7 +99,7 @@
           // TODO: play audio
           setTimeout(() => {
             this.changeNumbers(c);
-          }, this.hideInterval);
+          }, this.interval);
         } else {
           // if visible, change number, and make it invisible
           this.visible = false;
@@ -112,7 +114,7 @@
                 this.$refs.inp.focus();
               });
             }
-          }, this.invisibleInterval);
+          }, this.hideInterval);
         }
       },
       submit(e) {
