@@ -169,7 +169,7 @@
           const r = this.formatTrialResult();
           this.trialResults.push(r);
 
-          if (this.testType !== 'practice' && this.matches.every(e => e === 0)) {
+          if (this.testType !== 'practice' && this.matches.some(e => e === 0)) {
             this.failCount += 1;
           } else {
             this.failCount = 0;
