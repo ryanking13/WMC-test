@@ -24,7 +24,7 @@
     </div>
     <div id="test-input-div">
       <div id="test-div-elem">
-        <div v-if="onTest === false" class="">
+        <div v-if="onTest === false" class="" key="realinput">
           <sui-form size="massive">
             <sui-form-field>
                 <input
@@ -33,8 +33,21 @@
                   autofocus
                   @keydown.enter="submit"
                   @input="userInput = $event.target.value"
-                  :placeholder="answerStr"
                   id="input-massive"
+                />
+            </sui-form-field>
+          </sui-form>
+        </div>
+        <div v-if="practice && showAnswer" class="" key="practicefakeinput">
+          <sui-form size="massive">
+            <sui-form-field>
+                <input
+                  v-if="focusInput"
+                  disabled
+                  class="centered-input"
+                  :value="`정답: ${answerStr}`"
+                  id="input-massive"
+                  style="background-color: white; color: blue"
                 />
             </sui-form-field>
           </sui-form>
@@ -80,6 +93,7 @@
 
         audio: getAudio().number,
         answerStr: '',
+        showAnswer: false,
       };
     },
     computed: {
@@ -128,8 +142,16 @@
         } else {
           // submit user input
           const userInputArray = this.userInput.toString(10).split('');
-          this.handleSubmit(userInputArray.map(e => parseInt(e, 10)));
           this.onTest = true;
+          if (this.practice === true) {
+            this.showAnswer = true;
+            setTimeout(() => {
+              this.showAnswer = false;
+              this.handleSubmit(userInputArray.map(e => parseInt(e, 10)));
+            }, this.interval);
+          } else {
+            this.handleSubmit(userInputArray.map(e => parseInt(e, 10)));
+          }
         }
       },
       focusInput(e) { // focus to input element if other element is clicked

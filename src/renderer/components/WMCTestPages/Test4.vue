@@ -2,7 +2,7 @@
   <div>
     <div id="test-div">
 
-      <div class="matrix-container" v-if="onTest === true">
+      <div class="matrix-container" v-if="onTest === true && answerRevealed === false">
         <div class="matrix" v-for="r in 4" :key="`row${r}`">
           <div class="matrix-element" v-for="c in 4" :key="`col${c}`">
             <sui-button
@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div class="matrix-container" v-if="onTest === false">
+      <div class="matrix-container" v-if="userInputRevealed && onTest === false && answerRevealed === false" key="realinput">
         <div class="matrix" v-for="r in 4" :key="`rowreal${r}`">
           <div class="matrix-element" v-for="c in 4" :key="`colreal${c}`">
             <sui-button
@@ -24,6 +24,20 @@
               @click="userInputClick(r, c)"
               :inverted="!isUserInputClicked(r, c)"
               :color="userInputColor(r, c)"
+            >
+            </sui-button>
+          </div>
+        </div>
+      </div>
+
+      <div class="matrix-container" v-if="practice && answerRevealed" key="practicefakeinput">
+        <div class="matrix" v-for="r in 4" :key="`rowreal${r}`">
+          <div class="matrix-element" v-for="c in 4" :key="`colreal${c}`">
+            <sui-button
+              disabled
+              inverted
+              color="grey"
+              class="matrix-button"
             >
             <div v-if="showAnswer(r, c)">
               <v-icon name="mouse-pointer" scale="3" color='blue'/>
@@ -56,10 +70,12 @@
         currentIndex: -1,
 
         userInput: [],
+        userInputRevealed: false,
         userInputValid: true,
         invalidSubmit: false,
 
         answerStr: '',
+        answerRevealed: false,
       };
     },
     computed: {
@@ -86,6 +102,7 @@
               this.changeNumbers(c);
             } else {
               this.onTest = false;
+              this.userInputRevealed = true;
             }
           }, this.hideInterval);
         }
@@ -124,7 +141,7 @@
         return 'blue';
       },
       showAnswer(r, c) {
-        if (this.practice === true && this.answer[this.userInput.length] === this.rc2idx(r, c)) {
+        if (this.practice === true && this.answer.indexOf(this.rc2idx(r, c)) !== -1) {
           return true;
         }
         return false;
@@ -135,13 +152,22 @@
         // if length does not match, consider it as invalid
         if (this.userInput.length !== this.numbers.length) {
           this.invalidSubmit = true;
+        } else if (this.practice === true) {
+          setTimeout(() => {
+            this.answerRevealed = true;
+            this.userInputRevealed = false;
+            setTimeout(() => {
+              this.answerRevealed = false;
+              this.handleSubmit(this.userInput);
+            }, this.interval);
+          }, this.interval);
         } else {
           // submit user input
           // wait for interval to show input to user
           setTimeout(() => {
+            this.userInputRevealed = false;
             this.handleSubmit(this.userInput);
           }, this.interval);
-          // this.onTest = true;
         }
       },
     },

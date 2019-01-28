@@ -24,7 +24,7 @@
     </div>
     <div id="test-input-div">
       <div id="test-div-elem">
-        <div v-if="onTest === false" class="">
+        <div v-if="onTest === false" class="" key="realinput">
           <sui-form size="massive">
             <sui-form-field>
                 <input
@@ -35,12 +35,19 @@
                   @input="userInput = $event.target.value"
                   id="input-massive"
                 />
+            </sui-form-field>
+          </sui-form>
+        </div>
+        <div v-if="practice && showAnswer" class="" key="practicefakeinput">
+          <sui-form size="massive">
+            <sui-form-field>
                 <input
-                  v-if="showAnswer"
+                  v-if="focusInput"
                   disabled
                   class="centered-input"
-                  :placeholder="answerStr"
+                  :value="`정답: ${answerStr}`"
                   id="input-massive"
+                  style="background-color: white; color: blue"
                 />
             </sui-form-field>
           </sui-form>
