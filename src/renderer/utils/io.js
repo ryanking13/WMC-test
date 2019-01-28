@@ -89,6 +89,21 @@ export const loadAudio = () => {
     }
   }
 
+  for (let i = 1; i <= 14; i += 1) {
+    try {
+      file = path.join(__static, `/audio/letter_${i}.mp3`);
+      // file = `audio/number_${i}.mp3`;
+      const sound = new Howl({
+        src: [file],
+      });
+      audios.letter.push(sound);
+    } catch (e) {
+      const { dialog } = remote;
+      dialog.showMessageBox({ type: 'error', message: `음성 파일 ${file} 로드에 실패했습니다.` });
+      window.close();
+    }
+  }
+
   // load test description files
   const maxTests = 8;
   for (let i = 1; i <= maxTests; i += 1) {

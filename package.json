@@ -50,11 +50,11 @@
       "icon": "build/icons/icon.ico",
       "target": [
         {
-            "target": "portable",
-            "arch": [
-                "x64",
-                "ia32"
-            ]
+          "target": "portable",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         }
       ]
     },
@@ -64,6 +64,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "hangul-js": "^0.2.5",
     "howler": "^2.1.1",
     "iconv-lite": "^0.4.24",
     "semantic-ui-css": "^2.4.1",

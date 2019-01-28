@@ -5,13 +5,13 @@
     "trialUnit": "자음",
     "explanationMessages": [
         "화면에 한글 자음이 3개~8개 나타납니다.",
-        "잘 기억해서 ㄱ부터 ㅎ까지의 화면에 보였던 순서대로 입력하세요."
+        "잘 기억해서 ㄱ부터 ㅎ까지의 화면에 보였던 순서대로 입력하세요.",
         "각 글자는 1초 동안 보였다 사라집니다.",
         "글자의 개수는 점차 늘어납니다.",
         "세 번 연속 틀리면 검사가 종료됩니다.",
         "검사를 진행하려면 다음 버튼을 클릭해주세요."
     ],
-    "inputExplanationMessage": "본 순서대로 글자의 <span style='color: red'>초성<span>을 입력하고 Enter를 누르세요.",
+    "inputExplanationMessage": "본 순서대로 글자의 <span style='color: red'>초성<span>을 입력하고 <br/>Enter를 누르세요.",
     "interval": 1000,
     "hideInterval": 0,
     "hideCursor": true,

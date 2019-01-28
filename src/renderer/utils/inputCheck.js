@@ -15,3 +15,13 @@ export const isKorean = (val) => {
   const re = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+[\s]?[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/;
   return re.test(val);
 };
+
+export const isKoreanConsonant = (val) => {
+  const re = /^[ㄱ-ㅎ]+$/;
+  return re.test(val);
+};
+
+export const isKoreanConsonantList = (val) => {
+  const re = /^[ㄱ-ㅎ]+$/;
+  return val.every(e => re.test(e));
+};
