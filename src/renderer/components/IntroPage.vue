@@ -48,7 +48,7 @@
       setState('tests', cfg);
       setState('current-test-id', 0);
 
-      for (let i = 1; i <= 4; i += 1) {
+      for (let i = 1; i <= 5; i += 1) {
         const cfg = loadTestConfig(i);
         // window.$cookies.set(`test${i}-config`, cfg);
         setState(`test${i}-config`, cfg);
@@ -71,10 +71,19 @@
   h1 { font-size: 1rem; }
   body { font-family: 'Source Sans Pro', sans-serif; }
 
+  #hugetitle { font-size: 13rem; }
   #title { font-size: 8rem; }
   #smalltitle { font-size: 5rem; }
   #tinytitle { font-size: 3rem; }
   #titles { margin: 20vh auto; }
+  #titlescenter {
+    display: flex;
+    margin-top: 25vh;
+    height: 50vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
   #little-margin { margin: 5% auto; }
   #tiny-margin { margin: 3% auto; }
   #little-margin-all {
@@ -162,7 +171,7 @@
     justify-content: flex-end;
     align-items: center;
     text-align: center;
-    padding-top: 10%;
+    padding-top: 5%;
   }
 
   .center.container {
@@ -249,6 +258,10 @@
     font-size: 45vh;
   }
 
+  #testsentence {
+    font-size: 10vh;
+  }
+
   #testexplanation {
     font-size: 6vh;
   }
@@ -275,6 +288,17 @@
 
   #input-massive {
     font-size: 2.3rem;
+  }
+
+  #input-up-massive {
+    font-size: 2.6rem;
+  }
+
+  #hide-box {
+    position: absolute;
+    background-color: blue;
+    height: 100vh;
+    width: 100vw;
   }
 
 </style>

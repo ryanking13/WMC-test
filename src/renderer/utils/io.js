@@ -144,7 +144,7 @@ const formatResultType2 = (user, result) => {
         s += '\n';
         s += `${user.school},${user.grade}${user.class},${user.number},${user.name},${user.year}${user.month},${user.sex},`;
         s += `${r.testId},${r.testDate},${r.testStartTime},${r.testEndTime},${r.trialNo},`;
-        s += `${dumpArray(r.trialAnswer)},${dumpArray(r.trialResponse)},${r.trialResult},${r.trialLoad},`;
+        s += `${dumpArray(r.trialQuestion)},${dumpArray(r.trialResponse)},${r.trialResult},${r.trialLoad},`;
         s += `${r.anuPoints},${r.anlPoints},${r.trialStartTime},${r.trialEndTime},${r.trialDurationTime},`;
         s += `${dumpArray(r.interAnswer)},${dumpArray(r.interResponse)},${r.interResult},${r.interPoints}`;
       });

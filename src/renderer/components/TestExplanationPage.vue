@@ -10,7 +10,7 @@
         v-html="title"
       >
       </h1>
-      <div class="center container wide" id="no-pad-bottom">
+      <div class="center container verywide" id="no-pad-bottom">
         <h1
           is="sui-header"
           v-for="msg in msgs"
@@ -80,6 +80,7 @@
   }
 
   #no-pad-bottom {
+    margin-bottom: 0vh;
     padding-bottom: 0vh;
   }
 </style>

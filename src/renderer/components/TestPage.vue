@@ -1,17 +1,17 @@
 <template>
   <div id="wrapper" :class="cursor">
-    <sui-grid textAlign="center">
+    <sui-grid v-if="!delayed" textAlign="center">
       <sui-grid-row :columns='3'>
         <sui-grid-column>
           <sui-segment class="test header">
             <h3 is='sui-header' size='large' color="teal">문제번호</h3>
-            <h1 is='sui-header' size='large' id="input-massive">{{ currentTrialName }}</h1>
+            <h1 is='sui-header' size='large' id="input-up-massive">{{ currentTrialName }}</h1>
           </sui-segment>
         </sui-grid-column>
         <sui-grid-column>
           <sui-segment class="test header">
             <h3 is='sui-header' size='large' color="teal">정답여부</h3>
-            <h1 is='sui-header' size='large' id="input-massive">
+            <h1 is='sui-header' size='large' id="input-up-massive">
               <span v-for="(match, idx) in matches" :key="`match${idx}`" color="black">
                 <span v-if="match === 1" is="sui-header" color="green">O</span>
                 <span v-else-if="match === 0" is="sui-header" color="red">X</span>
@@ -22,7 +22,7 @@
         <sui-grid-column>
           <sui-segment class="test header">
             <h3 is='sui-header' size='large' color="teal">{{ trialUnit }} 개수</h3>
-            <h1 is='sui-header' size='large' id="input-massive">{{ currentTrialLength }}개</h1>
+            <h1 is='sui-header' size='large' id="input-up-massive">{{ currentTrialLength }}개</h1>
           </sui-segment>
         </sui-grid-column>
       </sui-grid-row>
@@ -66,6 +66,19 @@
       :handleSubmit="handleSubmit"
       :practice="testType === 'practice'"
     />
+    <Test5
+      v-if="testId === '5'"
+      :numbers="currentTrial.number"
+      :answerNumbers="currentAnswer"
+      :sentences="currentTrial.sentence"
+      :answerSentences="currentSubAnswer"
+      :interval="interval"
+      :hideInterval="hideInterval"
+      :handleSubmit="handleSubmit"
+      :setDelayed="setDelayed"
+      :practice="testType === 'practice'"
+      :message="inputExplanationMessage"
+    />
   </div>
 </template>
 
@@ -74,6 +87,7 @@
   import Test2 from './WMCTestPages/Test2';
   import Test3 from './WMCTestPages/Test3';
   import Test4 from './WMCTestPages/Test4';
+  import Test5 from './WMCTestPages/Test5';
   import { toDate, toTime, timeDiff } from '../utils/conversions';
   import { getState, setState } from '../utils/state';
 
@@ -87,7 +101,7 @@
       },
     },
     components: {
-      Test1, Test2, Test3, Test4,
+      Test1, Test2, Test3, Test4, Test5,
     },
     data() {
       return {
@@ -99,12 +113,15 @@
         trialsCount: 0,
         currentTrialIndex: 0,
         inputs: [],
+        inputsSub: [],
         interval: 1000,
         hideInterval: 300,
         failCount: 0,
         matches: [],
+        matchesSub: [],
         trialResults: [],
         hideCursor: false,
+        delayed: false,
 
         cfg: null,
         testStartTime: null,
@@ -122,10 +139,28 @@
         return this.trials[this.currentTrialIndex - 1];
       },
       currentTrialLength() {
+        if (typeof this.currentTrial.length === 'undefined') {
+          return this.currentTrial.number.length;
+        }
         return this.currentTrial.length;
       },
       currentAnswer() {
-        return this.answers[this.currentTrialIndex - 1];
+        let answer = this.answers[this.currentTrialIndex - 1];
+        if (this.testId === '5') { // reading
+          answer = answer.number;
+        } else if (this.testId === '8') { // Symmetry
+          answer = answer.matrix;
+        }
+        return answer;
+      },
+      currentSubAnswer() {
+        let answer = this.answers[this.currentTrialIndex - 1];
+        if (this.testId === '5') { // reading
+          answer = answer.sentence;
+        } else if (this.testId === '8') { // Symmetry
+          answer = answer.image;
+        }
+        return answer;
       },
       cursor() {
         if (this.hideCursor === true) {
@@ -160,9 +195,14 @@
       this.trialStartTime = new Date();
     },
     methods: {
-      handleSubmit(userInput) {
+      handleSubmit(userInput, userInputSub) {
         this.inputs = userInput;
         this.matches = this.inputs.map((e, i) => (e === this.currentAnswer[i] ? 1 : 0));
+
+        if (typeof userInputSub !== 'undefined') {
+          this.inputsSub = userInputSub;
+          this.matchesSub = this.inputsSub.map((e, i) => (e === (this.currentSubAnswer[i]) ? 1 : 0));
+        }
 
         // if it is real trial and every answer is wrong
         this.$nextTick(() => {
@@ -205,7 +245,18 @@
         result.trialEndTime = toTime(this.trialEndTime);
         result.trialDurationTime = timeDiff(this.trialStartTime, this.trialEndTime);
 
+        // test 5 or 8 needs special columns
+        if (this.testId === '5' || this.testId === '8') {
+          result.interAnswer = this.currentSubAnswer.map(e => (e === true ? 1 : 0));
+          result.interResponse = this.inputsSub.map(e => (e === true ? 1 : 0));
+          result.interPoints = this.matchesSub.every(e => e === 1) ? 1 : 0;
+          result.interResult = result.interPoints === 1 ? 'success' : 'failure';
+        }
+
         return result;
+      },
+      setDelayed(v) {
+        this.delayed = v;
       },
       finishTest() {
         if (this.testType === 'practice') {
