@@ -1,8 +1,10 @@
 <template>
   <div class="button container">
     <sui-button
+      :id="id"
+      class="move-button"
       :color="color"
-      size="huge"
+      :size="size"
       @click="onClick"
       :disabled="!enabled"
     >
@@ -34,6 +36,12 @@
       color: {
         default: 'black',
       },
+      size: {
+        default: 'massive',
+      },
+      id: {
+        default: '',
+      }
     },
     methods: {
       async onClick() {

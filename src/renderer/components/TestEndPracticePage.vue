@@ -2,17 +2,17 @@
   <div id="wrapper">
     <div id="titlesnomargin">
       <h1 is="sui-header" id="title" textAlign="center" size="huge" color="blue"></h1>
-      <div class="center container wide title">
-        <h1 is="sui-header" textAlign="center" size="huge">
+      <div class="center container verywide title">
+        <h1 is="sui-header" textAlign="center" size="huge" style="font-size: 3.5rem">
           지금부터는 점수가 기록됩니다.
         </h1>
-        <h1 is="sui-header" textAlign="center" size="huge">
+        <h1 is="sui-header" textAlign="center" size="huge" style="font-size: 3.5rem">
           끝까지 집중해서 입력하시기 바랍니다.
         </h1>
-        <h1 is="sui-header" textAlign="center" size="huge">
+        <h1 is="sui-header" textAlign="center" size="huge" style="font-size: 3.5rem">
           연습문제를 모두 틀린 경우
         </h1>
-        <h1 is="sui-header" textAlign="center" size="huge">
+        <h1 is="sui-header" textAlign="center" size="huge" style="font-size: 3.5rem">
           손을 들어 표시해주세요. 
         </h1>
       </div>
@@ -24,6 +24,7 @@
               :route="'/test/' + testId + '/real'"
               msg="검사 시작"
               color="blue"
+              id="input-huge"
             />
             </sui-grid-column>
             <sui-grid-column>
@@ -31,6 +32,7 @@
               :route="'/test/' + testId + '/practice'"
               msg="한번 더 연습하기"
               color="olive"
+              id="input-huge"
             />
             </sui-grid-column>
           </sui-grid-row>

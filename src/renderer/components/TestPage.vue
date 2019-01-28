@@ -4,25 +4,25 @@
       <sui-grid-row :columns='3'>
         <sui-grid-column>
           <sui-segment class="test header">
-            <h3 is='sui-header' size='big'>문제번호</h3>
-            <h3 is='sui-header' size='huge'>{{ currentTrialName }}</h3>
+            <h3 is='sui-header' size='large' color="teal">문제번호</h3>
+            <h1 is='sui-header' size='large' id="input-massive">{{ currentTrialName }}</h1>
           </sui-segment>
         </sui-grid-column>
         <sui-grid-column>
           <sui-segment class="test header">
-            <h3 is='sui-header' size='big'>정답여부</h3>
-            <h3 is='sui-header' size='large'>
+            <h3 is='sui-header' size='large' color="teal">정답여부</h3>
+            <h1 is='sui-header' size='large' id="input-massive">
               <span v-for="(match, idx) in matches" :key="`match${idx}`" color="black">
                 <span v-if="match === 1" is="sui-header" color="green">O</span>
                 <span v-else-if="match === 0" is="sui-header" color="red">X</span>
               </span>
-            </h3>
+            </h1>
           </sui-segment>
         </sui-grid-column>
         <sui-grid-column>
           <sui-segment class="test header">
-            <h3 is='sui-header' size='big'>{{ trialUnit }} 개수</h3>
-            <h3 is='sui-header' size='huge'>{{ currentTrialLength }}개</h3>
+            <h3 is='sui-header' size='large' color="teal">{{ trialUnit }} 개수</h3>
+            <h1 is='sui-header' size='large' id="input-massive">{{ currentTrialLength }}개</h1>
           </sui-segment>
         </sui-grid-column>
       </sui-grid-row>

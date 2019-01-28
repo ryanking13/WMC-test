@@ -1,6 +1,6 @@
 <template>
   <sui-label
-    size="large"
+    :size="size"
     :color="color"
     v-show="condition"
     :pointing="pointing"
@@ -24,6 +24,9 @@
       pointing: {
         default: 'above',
       },
+      size: {
+        default: 'large',
+      }
     },
   };
 </script>

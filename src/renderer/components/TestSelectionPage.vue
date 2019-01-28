@@ -6,16 +6,18 @@
         <sui-grid-row v-for="(testRow, idx) in testButtonsGrid" :key="idx">
           <sui-grid-column v-for="test in testRow" :key="test.key" :width="4">
             <MovePageButton
+              id="input-huge"
               color="blue"
               :msg="test.name"
               :enabled="test.id == currentTestId"
               :route="'/test-explanation/' + test.id"
+              size="massive"
             />
           </sui-grid-column>
         </sui-grid-row>
       </sui-grid>
       <div id="tiny-margin">
-        <h1 is="sui-header" textAlign="center">준비가 되면 {{currentTestName}} 버튼을 누르세요.</h1>
+        <h1 is="sui-header" id="tinytitle" textAlign="center">준비가 되면 {{currentTestName}} 버튼을 누르세요.</h1>
       </div>
     </div>
   </div>

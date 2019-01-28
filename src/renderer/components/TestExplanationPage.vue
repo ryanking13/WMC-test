@@ -10,19 +10,23 @@
         v-html="title"
       >
       </h1>
-      <div class="center container wide">
+      <div class="center container wide" id="no-pad-bottom">
         <h1
           is="sui-header"
           v-for="msg in msgs"
           :key="msg"
           textAlign="left"
-          size="huge"
+          size="big"
           v-html="msg"
+          id="explanation-message"
         >
         </h1>
       </div>
-      <MovePageButton :route="'/test/' + testId + '/practice'"/>
     </div>
+    <MovePageButton
+      :route="'/test/' + testId + '/practice'"
+      id="no-margin-button"
+    />
   </div>
 </template>
 
@@ -54,3 +58,19 @@
     },
   };
 </script>
+
+<style>
+  #explanation-message {
+    font-size: 2.4rem;
+    margin-bottom: 0vh;
+  }
+
+  #no-margin-button {
+    margin-top: 0vh;
+  }
+
+  #no-pad-bottom {
+    padding-bottom: 0vh;
+  }
+</style>
+

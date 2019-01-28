@@ -2,18 +2,18 @@
   <div id="wrapper">
     <!-- <img id="logo" src="~@/assets/logo.png" alt="electron-vue"> -->
     <div id="titles">
-      <h1 is="sui-header" id="title" textAlign="center" size="huge" color="blue">작업기억 검사가 모두 끝났습니다.</h1>
-      <h1 is="sui-header" textAlign="center" size="huge">수고 많으셨습니다.</h1>
-      <div class="button container">
-        <sui-button
-          color="black"
-          size="huge"
-          @click="onClick"
-          :disabled="!canClose"
-        >
-          검사 종료
-        </sui-button>
-      </div>
+      <h1 is="sui-header" id="smalltitle" textAlign="center" size="huge" color="blue">작업기억 검사가 모두 끝났습니다.</h1>
+      <h1 is="sui-header" id="tinytitle" textAlign="center" size="huge">수고 많으셨습니다.</h1>
+    </div>
+    <div class="button container" id="end-button-no-margin">
+      <sui-button
+        color="black"
+        size="massive"
+        @click="onClick"
+        :disabled="!canClose"
+      >
+        검사 종료
+      </sui-button>
     </div>
   </div>
   
@@ -47,3 +47,8 @@
     },
   };
 </script>
+
+<style>
+  #end-button-no-margin {
+  }
+</style>

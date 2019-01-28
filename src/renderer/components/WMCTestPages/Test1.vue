@@ -34,6 +34,7 @@
                   @keydown.enter="submit"
                   @input="userInput = $event.target.value"
                   :placeholder="answerStr"
+                  id="input-massive"
                 />
             </sui-form-field>
           </sui-form>
@@ -44,6 +45,7 @@
       <InvalidLabel
             :condition="userInputInvalidLabelOn === true"
             :msg="`숫자 ${numbers.length}개를 입력하세요.`"
+            size="massive"
       />
     </div>
   </div>

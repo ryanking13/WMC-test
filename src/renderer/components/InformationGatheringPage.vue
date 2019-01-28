@@ -1,104 +1,127 @@
 <template>
   <div id="wrapper">
-    <div class="center container">
-      <sui-form>
-        <h3 is="sui-header" size="large">학교명</h3>
-        <sui-form-field inline>
-          <sui-button
-            :color="(schoolButtonSukgyeOn === true) ? 'orange' : 'blue'"
-            @click="onClickSchoolButtonSukGye"
-          >
-            석계
-          </sui-button>
-          <sui-button
-            :color="(schoolButtonElseOn === true) ? 'orange' : 'blue'"
-            @click="onClickSchoolButtonElse"
-          >
-            기타
-          </sui-button>
-        </sui-form-field>
-        <sui-form-field>
+    <div class="center container verywide">
+      <sui-grid class="info-grid" :columns="2" divided relaxed="very">
+        <sui-grid-column>
+          <sui-form>
+            <h3 is="sui-header" id="tinytitle" size="large">학교명</h3>
+            <sui-form-field inline>
+              <sui-button
+                :color="(schoolButtonSukgyeOn === true) ? 'orange' : 'blue'"
+                size="big"
+                @click="onClickSchoolButtonSukGye"
+              >
+                석계
+              </sui-button>
+              <sui-button
+                :color="(schoolButtonElseOn === true) ? 'orange' : 'blue'"
+                size="big"
+                @click="onClickSchoolButtonElse"
+              >
+                기타
+              </sui-button>
+            </sui-form-field>
+            <sui-form-field>
+              <input
+                id="input-large"
+                @keydown.enter="blockEnter"
+                @input="schoolInput = $event.target.value"
+                v-show="schoolButtonElseOn === true"
+                placeholder="예) 석계"
+              >
+              <InvalidLabel
+                :condition="schoolButtonElseOn === true && schoolInputValid === 0"
+                size="big"
+                msg="3 글자 이내로 입력하세요"
+              />
+            </sui-form-field>
+            <h3 is="sui-header" id="tinytitle" size="large">학년반</h3>
+            <sui-form-field inline>
+              <sui-dropdown
+                id="input-large"
+                placeholder="학년"
+                selection
+                :options="gradeOptions"
+                v-model="gradeInput"
+              />
+              <sui-dropdown
+                id="input-large"
+                placeholder="반"
+                selection
+                :options="classOptions"
+                v-model="classInput"
+              />
+            </sui-form-field>
+            <sui-form-field>
+              <h3 is="sui-header" id="tinytitle" size="large">번호</h3>
+              <input
+                id="input-large"
+                class="input-large"
+                @keydown.enter="blockEnter"
+                @input="numberInput = $event.target.value"
+                placeholder="예) 01"
+              />
+              <InvalidLabel
+                size="big"
+                :condition="numberInputValid === 0"
+                msg="01 ~ 99 사이의 숫자만 입력하세요"
+              />
+            </sui-form-field>
+          </sui-form>
+        </sui-grid-column>
+        <sui-grid-column>
+          <sui-form>
+          <h3 is="sui-header" id="tinytitle" size="large">생년월</h3>
+          <sui-form-field inline>
+            <sui-dropdown
+              id="input-large"
+              placeholder="년"
+              selection
+              :options="birthYearOptions"
+              v-model="birthYearInput"
+            />
+            <sui-dropdown
+              id="input-large"
+              placeholder="월"
+              selection
+              :options="birthMonthOptions"
+              v-model="birthMonthInput"
+            />
+          </sui-form-field>
+          <sui-form-field>
+            <h3 is="sui-header" id="tinytitle" size="large">이름</h3>
             <input
+              id="input-large"
               @keydown.enter="blockEnter"
-              @input="schoolInput = $event.target.value"
-              v-show="schoolButtonElseOn === true"
-              placeholder="예) 석계"
+              @input="nameInput = $event.target.value"
+              placeholder="예) 홍길동"
             >
             <InvalidLabel
-              :condition="schoolButtonElseOn === true && schoolInputValid === 0"
-              msg="3 글자 이내로 입력하세요"
+              :condition="nameInputValid === 0"
+              size="big"
+              msg="이름은 한글 3글자 이내로 입력하세요"
             />
-        </sui-form-field>
-        <h3 is="sui-header" size="large">학년반</h3>
-        <sui-form-field inline>
-          <sui-dropdown
-            placeholder="학년"
-            selection
-            :options="gradeOptions"
-            v-model="gradeInput"
-          />
-          <sui-dropdown
-            placeholder="반"
-            selection
-            :options="classOptions"
-            v-model="classInput"
-          />
-        </sui-form-field>
-        <sui-form-field>
-          <h3 is="sui-header" size="large">번호</h3>
-          <input
-            @keydown.enter="blockEnter"
-            @input="numberInput = $event.target.value"
-            placeholder="예) 01"
-          >
-          <InvalidLabel
-            :condition="numberInputValid === 0"
-            msg="01 ~ 99 사이의 숫자만 입력하세요"
-          />
-        </sui-form-field>
-        <h3 is="sui-header" size="large">생년월</h3>
-        <sui-form-field inline>
-          <sui-dropdown
-            placeholder="년"
-            selection
-            :options="birthYearOptions"
-            v-model="birthYearInput"
-          />
-          <sui-dropdown
-            placeholder="월"
-            selection
-            :options="birthMonthOptions"
-            v-model="birthMonthInput"
-          />
-        </sui-form-field>
-        <sui-form-field>
-          <h3 is="sui-header" size="large">이름</h3>
-          <input
-            @keydown.enter="blockEnter"
-            @input="nameInput = $event.target.value"
-            placeholder="예) 홍길동"
-          >
-          <InvalidLabel
-            :condition="nameInputValid === 0"
-            msg="이름은 한글 3글자 이내로 입력하세요"
-          />
-        </sui-form-field>
-        <h3 is="sui-header" size="large">성별</h3>
-        <sui-form-field inline>
-          <sui-button
-            :color="(sexButtonMaleOn === true) ? 'orange' : 'blue'"
-            @click="onClickSexButtonMale"
-          >
-            남
-          </sui-button>
-          <sui-button
-            :color="(sexButtonFemaleOn === true) ? 'orange' : 'blue'"
-            @click="onClickSexButtonFemale"
-          >
-            여
-          </sui-button>
-        </sui-form-field>
-      </sui-form>
+          </sui-form-field>
+          <h3 is="sui-header" id="tinytitle" size="large">성별</h3>
+          <sui-form-field inline>
+            <sui-button
+              :color="(sexButtonMaleOn === true) ? 'orange' : 'blue'"
+              size="big"
+              @click="onClickSexButtonMale"
+            >
+              남
+            </sui-button>
+            <sui-button
+              :color="(sexButtonFemaleOn === true) ? 'orange' : 'blue'"
+              size="big"
+              @click="onClickSexButtonFemale"
+            >
+              여
+            </sui-button>
+          </sui-form-field>
+        </sui-form>
+      </sui-grid-column>
+      </sui-grid>
       <MovePageButton :enabled="valid" :beforeMove="onClickNext" route='/test-selection' />
     </div>
   </div>
@@ -244,3 +267,8 @@
     },
   };
 </script>
+
+<style>
+  .info-grid {
+  }
+</style>

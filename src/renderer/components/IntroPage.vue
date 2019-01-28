@@ -71,10 +71,11 @@
   h1 { font-size: 1rem; }
   body { font-family: 'Source Sans Pro', sans-serif; }
 
-  #title { font-size: 6rem; }
-  #smalltitle { font-size: 3rem; }
+  #title { font-size: 8rem; }
+  #smalltitle { font-size: 5rem; }
+  #tinytitle { font-size: 3rem; }
   #titles { margin: 20vh auto; }
-  #little-margin { margin: 8% auto; }
+  #little-margin { margin: 5% auto; }
   #tiny-margin { margin: 3% auto; }
   #little-margin-all {
     margin-top: 10%;
@@ -188,6 +189,17 @@
     text-align: left;
   }
 
+  .center.container.verywide {
+    display: block;
+    flex-direction: column;
+    width: 80vw;
+    margin: auto;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    align-items: center;
+    text-align: left;
+  }
+
   .flex-container {
     margin-top: 20vh;
   }
@@ -195,7 +207,7 @@
   .test.header {
     background-color: #D9E9FF;
     color: #D9E9FF;
-    height: 15vh;
+    height: 20vh;
   }
 
   .centered-input {
@@ -234,11 +246,11 @@
   }
 
   #testletter {
-    font-size: 35vh;
+    font-size: 45vh;
   }
 
   #testexplanation {
-    font-size: 5vh;
+    font-size: 6vh;
   }
 
   .hide-cursor {
@@ -248,6 +260,21 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+  }
+  
+  .move-button {
+  }
+
+  #input-large {
+    font-size: 1.3rem;
+  }
+
+  #input-huge {
+    font-size: 1.8rem;
+  }
+
+  #input-massive {
+    font-size: 2.3rem;
   }
 
 </style>
