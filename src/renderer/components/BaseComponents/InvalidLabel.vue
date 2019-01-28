@@ -26,7 +26,7 @@
       },
       size: {
         default: 'large',
-      }
+      },
     },
   };
 </script>

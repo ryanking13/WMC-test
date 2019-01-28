@@ -41,7 +41,7 @@
       },
       id: {
         default: '',
-      }
+      },
     },
     methods: {
       async onClick() {

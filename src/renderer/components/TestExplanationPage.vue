@@ -33,6 +33,7 @@
 <script>
   import MovePageButton from './BaseComponents/MovePageButton';
   import { getState } from '../utils/state';
+  import { getAudio } from '../utils/audio';
 
   export default {
     props: {
@@ -47,6 +48,7 @@
       return {
         testId: 0,
         explanation: '',
+        audio: getAudio().testDesc,
       };
     },
     created() {
@@ -55,6 +57,14 @@
       this.testId = this.id;
       this.title = cfg.testTitle;
       this.msgs = cfg.explanationMessages;
+      if (typeof this.audio !== 'undefined') {
+        this.audio[this.testId].play();
+      }
+    },
+    beforeDestroy() {
+      if (typeof this.audio !== 'undefined') {
+        this.audio[this.testId].stop();
+      }
     },
   };
 </script>

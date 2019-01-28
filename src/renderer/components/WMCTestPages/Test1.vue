@@ -33,6 +33,12 @@
                   autofocus
                   @keydown.enter="submit"
                   @input="userInput = $event.target.value"
+                  id="input-massive"
+                />
+                <input
+                  v-if="showAnswer"
+                  disabled
+                  class="centered-input"
                   :placeholder="answerStr"
                   id="input-massive"
                 />
@@ -80,6 +86,7 @@
 
         audio: getAudio().number,
         answerStr: '',
+        showAnswer: false,
       };
     },
     computed: {
@@ -128,8 +135,16 @@
         } else {
           // submit user input
           const userInputArray = this.userInput.toString(10).split('');
-          this.handleSubmit(userInputArray.map(e => parseInt(e, 10)));
           this.onTest = true;
+          if (this.practice === true) {
+            this.showAnswer = true;
+            setTimeout(() => {
+              this.showAnswer = false;
+              this.handleSubmit(userInputArray.map(e => parseInt(e, 10)));
+            }, this.interval);
+          } else {
+            this.handleSubmit(userInputArray.map(e => parseInt(e, 10)));
+          }
         }
       },
       focusInput(e) { // focus to input element if other element is clicked

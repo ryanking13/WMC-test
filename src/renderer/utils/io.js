@@ -72,7 +72,7 @@ export const loadTestConfig = (testId) => {
 
 // load audio(number, letter) files
 export const loadAudio = () => {
-  const audios = { number: ['DUMMY'], letter: ['DUMMY'] };
+  const audios = { number: ['DUMMY'], letter: ['DUMMY'], testDesc: ['DUMMY'] };
   let file = '';
   for (let i = 1; i <= 9; i += 1) {
     try {
@@ -82,6 +82,22 @@ export const loadAudio = () => {
         src: [file],
       });
       audios.number.push(sound);
+    } catch (e) {
+      const { dialog } = remote;
+      dialog.showMessageBox({ type: 'error', message: `음성 파일 ${file} 로드에 실패했습니다.` });
+      window.close();
+    }
+  }
+
+  // load test description files
+  const maxTests = 8;
+  for (let i = 1; i <= maxTests; i += 1) {
+    try {
+      file = path.join(__static, `/audio/test_desc_${i}.mp3`);
+      const sound = new Howl({
+        src: [file],
+      });
+      audios.testDesc.push(sound);
     } catch (e) {
       const { dialog } = remote;
       dialog.showMessageBox({ type: 'error', message: `음성 파일 ${file} 로드에 실패했습니다.` });
