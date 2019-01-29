@@ -67,18 +67,18 @@
         </div>
         <div v-if="onSentence" id="arrow-input">
           <div id="arrow-input-element">
-            <v-icon name="times" scale="8" color='red'/>
+            <v-icon :id="rightPressed ? 'invisible-icon': ''" name="times" :scale="leftButtonScale" color='red'/>
           </div>
           <div id="arrow-input-element">
-            <v-icon name="arrow-left" scale="8" color='red'/>
+            <v-icon :id="rightPressed ? 'invisible-icon': ''" name="arrow-left" :scale="leftButtonScale" color="red"/>
           </div>
           <div id="arrow-input-element"></div>
           <div id="arrow-input-element"></div>
           <div id="arrow-input-element">
-            <v-icon name="arrow-right" scale="8" color='blue'/>
+            <v-icon :id="leftPressed ? 'invisible-icon': ''" name="arrow-right" :scale="rightButtonScale" color="blue"/>
           </div>
           <div id="arrow-input-element">
-            <v-icon name="regular/circle" scale="8" color='blue'/>
+            <v-icon :id="leftPressed ? 'invisible-icon': ''" name="regular/circle" :scale="rightButtonScale" color='blue'/>
           </div>
         </div>
       </div>
@@ -130,6 +130,11 @@
         audio: getAudio().number,
         answerStr: '',
         showAnswer: false,
+
+        leftButtonScale: 8,
+        rightButtonScale: 8,
+        rightPressed: false,
+        leftPressed: false,
       };
     },
     computed: {
@@ -212,14 +217,37 @@
       },
       arrowKeyListener(e) {
         if (e) e.preventDefault();
+
+        const RIGHT = 39;
+        const LEFT = 37;
+
         // ignore if sentence is not showing
         if (this.onSentence === false) {
           // do nothing
-        } else if (e.keyCode === 39 || e.keyCode === 37) { // right/left
+        } else if (e.keyCode === RIGHT || e.keyCode === LEFT) { // right/left
           // remove listener for preventing multiple keypress
           window.removeEventListener('keyup', this.arrowKeyListener);
 
-          const inp = { 39: true, 37: false }[e.keyCode];
+          let inp = true;
+          if (e.keyCode === LEFT) {
+            inp = false;
+          }
+
+          if (e.keyCode === RIGHT) {
+            this.rightButtonScale = 10;
+            this.rightPressed = true;
+          } else if (e.keyCode === LEFT) {
+            this.leftButtonScale = 10;
+            this.leftPressed = true;
+          }
+
+          setTimeout(() => {
+            this.rightButtonScale = 8;
+            this.leftButtonScale = 8;
+            this.rightPressed = false;
+            this.leftPressed = false;
+          }, this.interval);
+
           this.userInputSentence.push(inp);
           this.visible = false;
 
@@ -303,6 +331,10 @@
   #arrow-input-element {
     margin-left: 5%;
     margin-right: 5%;
+  }
+
+  #invisible-icon {
+    visibility: hidden;
   }
 
 </style>
