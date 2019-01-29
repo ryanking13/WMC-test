@@ -262,7 +262,7 @@
   }
 
   #testarrow {
-    font-size: 15vh;
+    font-size: 18vh;
   }
 
   #testsentence {

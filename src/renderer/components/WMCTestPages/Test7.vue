@@ -8,6 +8,7 @@
           is="sui-header"
           size="massive"
           textAlign="center"
+          style="margin-top: 5vh;"
         >
           <img id="arrow-image" :src="currentImage" width="300" height="300" />
         </h1>
@@ -21,7 +22,8 @@
         >
         </h1>
       </div>
-      <div class="arrow-container" key="realinput">
+
+      <div v-show="userInputRevealed && onTest === false && answerRevealed === false" class="arrow-container" key="realinput">
         <div class="arrow-row" v-for="r in 3" :key="`rowreal${r}`">
           <div class="" v-for="c in 3" :key="`colreal${c}`">
             <sui-button
@@ -41,12 +43,32 @@
           </div>
         </div>
       </div>
+
+      <div v-if="practice && answerRevealed" class="arrow-container" key="practicefaceinput">
+        <div class="arrow-row" v-for="r in 3" :key="`rowreal${r}`">
+          <div class="" v-for="c in 3" :key="`colreal${c}`">
+            <sui-button
+              class=""
+              id="arrow-button"
+            >
+              <img
+                v-if="rc2idx(r, c) !== 0"
+                :src="image[rc2idx(r, c)].src"
+                width="150"
+                height="150"
+                :id="answerArrowState(r, c)"
+              />
+              <sui-label id="arrow-answer-string" v-if="rc2idx(r, c) === 0">정답</sui-label>
+            </sui-button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-  import { isDigit } from '../../utils/inputCheck';
   import { getImage } from '../../utils/image';
   import InvalidLabel from '../BaseComponents/InvalidLabel';
   export default {
@@ -74,7 +96,8 @@
 
         image: getImage().arrow,
         answerStr: '',
-        showAnswer: false,
+        answerRevealed: false,
+        userInputRevealed: false,
 
         arrowHovered: [false, false, false, false, false, false, false, false, false],
         arrowClicked: [false, false, false, false, false, false, false, false, false],
@@ -114,6 +137,7 @@
               this.changeNumbers(c);
             } else {
               this.onTest = false;
+              this.userInputRevealed = true;
             }
           }, this.hideInterval);
         }
@@ -139,25 +163,22 @@
         // if length does not match, consider it as invalid
         if (this.userInput.length !== this.numbers.length) {
           this.invalidSubmit = true;
+        } else if (this.practice === true) {
+          setTimeout(() => {
+            this.answerRevealed = true;
+            this.userInputRevealed = false;
+            setTimeout(() => {
+              this.answerRevealed = false;
+              this.handleSubmit(this.userInput);
+            }, this.interval);
+          }, this.interval);
         } else {
           // submit user input
-          const userInputArray = this.userInput.toString(10).split('');
-          this.onTest = true;
-          if (this.practice === true) {
-            this.showAnswer = true;
-            setTimeout(() => {
-              this.showAnswer = false;
-              this.handleSubmit(userInputArray.map(e => parseInt(e, 10)));
-            }, this.interval);
-          } else {
-            this.handleSubmit(userInputArray.map(e => parseInt(e, 10)));
-          }
-        }
-      },
-      focusInput(e) { // focus to input element if other element is clicked
-        if (e) e.preventDefault();
-        if (typeof this.$refs.inp !== 'undefined') {
-          this.$refs.inp.focus();
+          // wait for interval to show input to user
+          setTimeout(() => {
+            this.userInputRevealed = false;
+            this.handleSubmit(this.userInput);
+          }, this.interval);
         }
       },
       onMouseOverArrow(r, c) {
@@ -170,9 +191,9 @@
       },
       onMouseClickArrow(r, c) {
         const idx = this.rc2idx(r, c);
-        this.arrowClicked = this.arrowClicked.map((e, i) => (i === idx ? true : e));
-        if (this.userInput.indexOf(idx) !== -1) {
-          this.userInput.push(idx);
+        if (this.userInput.length < this.answer.length && this.userInput.indexOf(idx) === -1) {
+          this.arrowClicked = this.arrowClicked.map((e, i) => (i === idx ? true : e));
+          this.userInput = this.userInput.concat(idx);
         }
       },
       arrowState(r, c) {
@@ -188,6 +209,17 @@
         }
         return '';
       },
+      answerArrowState(r, c) {
+        const idx = this.rc2idx(r, c);
+        if (idx === 0) {
+          return '';
+        }
+
+        if (this.answer.indexOf(idx) !== -1) {
+          return 'arrow-answer';
+        }
+        return '';
+      },
     },
     watch: {
       // when numbers prop is received, start new test
@@ -195,6 +227,9 @@
         immediate: true,
         handler() {
           this.currentIndex = -1;
+          this.userInput = [];
+          this.arrowHovered = [false, false, false, false, false, false, false, false, false];
+          this.arrowClicked = [false, false, false, false, false, false, false, false, false];
           this.onTest = true;
           setTimeout(() => {
             this.changeNumbers(this.numbers.length);
@@ -209,13 +244,13 @@
           }
         },
       },
-      userInput(val) {
-        if (!isDigit(val) || val.length > this.numbers.length) {
-          this.userInputValid = false;
-        } else {
-          this.userInputValid = true;
-          this.invalidSubmit = false;
-        }
+      userInput: {
+        immediate: true,
+        handler() {
+          if (this.userInput.length === this.numbers.length) {
+            this.submit();
+          }
+        },
       },
     },
   };
@@ -268,5 +303,21 @@
   
   #arrow-click {
     filter: invert(63%) sepia(54%) saturate(1919%) hue-rotate(360deg) brightness(103%) contrast(103%);
+  }
+
+  #arrow-answer {
+    filter: invert(83%) sepia(9%) saturate(6812%) hue-rotate(20deg) brightness(92%) contrast(101%);
+  }
+
+  #arrow-answer-string {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    background-color: transparent;
+    font-size: 2.7rem;
+    text-align: center;
+    color: #A9CC00;
   }
 </style>
