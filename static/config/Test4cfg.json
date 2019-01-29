@@ -1,10 +1,11 @@
 {
     "id": "test4",
     "name": "Matrix back",
-    "testTitle": "색이 변한 칸 <span style='color: red'>거꾸로</span> 기억하기",
+    "testTitle": "<span style='letter-spacing: -5px'>색이 변한 칸 <span style='color: red'>거꾸로</span> 기억하기</span>",
     "trialUnit": "칸의",
     "explanationMessages": [
-        "가로 4칸, 세로 4칸으로 된 정사각형 중에서 색이 변하는 칸을 <span style='color: red'>마지막 칸부터 역순(반대순서)로</span> 클릭하세요.",
+        "가로 4칸, 세로 4칸으로 된 정사각형 중에서 색이 변하는 칸을,",
+        "<span style='color: red'>마지막 칸부터 역순(반대순서)로</span> 클릭하세요.",
         "색이 변하는 칸의 개수는 점차 늘어납니다.",
         "세 번 연속 틀리면 검사가 종료됩니다.",
         "검사를 진행하려면 다음 버튼을 클릭해주세요."
