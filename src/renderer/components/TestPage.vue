@@ -89,6 +89,16 @@
       :practice="testType === 'practice'"
       :message="inputExplanationMessage"
     />
+    <Test7
+      v-if="testId === '7'"
+      :numbers="currentTrial"
+      :answer="currentAnswer"
+      :interval="interval"
+      :hideInterval="hideInterval"
+      :handleSubmit="handleSubmit"
+      :practice="testType === 'practice'"
+      :message="inputExplanationMessage"
+    />
   </div>
 </template>
 
@@ -99,6 +109,7 @@
   import Test4 from './WMCTestPages/Test4';
   import Test5 from './WMCTestPages/Test5';
   import Test6 from './WMCTestPages/Test6';
+  import Test7 from './WMCTestPages/Test7';
   import { toDate, toTime, timeDiff } from '../utils/conversions';
   import { getState, setState } from '../utils/state';
 
@@ -112,7 +123,7 @@
       },
     },
     components: {
-      Test1, Test2, Test3, Test4, Test5, Test6,
+      Test1, Test2, Test3, Test4, Test5, Test6, Test7,
     },
     data() {
       return {

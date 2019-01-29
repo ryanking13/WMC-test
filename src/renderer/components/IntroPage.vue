@@ -12,8 +12,9 @@
 
 <script>
   import MovePageButton from './BaseComponents/MovePageButton';
-  import { loadConfig, loadTestConfig, loadAudio } from '../utils/io';
+  import { loadConfig, loadTestConfig, loadAudio, loadImage } from '../utils/io';
   import { registerAudio } from '../utils/audio';
+  import { registerImage } from '../utils/image';
   import { EnterMoveListener } from '../utils/eventListeners';
   import { setState } from '../utils/state';
 
@@ -38,6 +39,8 @@
       const cfg = loadConfig(cfgFileName, maxTests);
       const audios = loadAudio();
       registerAudio(audios);
+      const images = loadImage();
+      registerImage(images);
 
       // window.$cookies.set('user', '{}');
       // window.$cookies.set('test-result', '{}');
@@ -48,7 +51,7 @@
       setState('tests', cfg);
       setState('current-test-id', 0);
 
-      for (let i = 1; i <= 6; i += 1) {
+      for (let i = 1; i <= 7; i += 1) {
         const cfg = loadTestConfig(i);
         // window.$cookies.set(`test${i}-config`, cfg);
         setState(`test${i}-config`, cfg);
@@ -256,6 +259,10 @@
 
   #testletter {
     font-size: 45vh;
+  }
+
+  #testarrow {
+    font-size: 15vh;
   }
 
   #testsentence {

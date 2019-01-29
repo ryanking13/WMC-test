@@ -123,6 +123,25 @@ export const loadAudio = () => {
   return audios;
 };
 
+// load arrow and symmetry check images
+export const loadImage = () => {
+  const images = { arrow: [] };
+  let file;
+  for (let i = 0; i <= 8; i += 1) {
+    try {
+      file = path.join(__static, `/image/arrow_${i}.png`);
+      const image = new Image();
+      image.src = file;
+      images.arrow.push(image);
+    } catch (e) {
+      const { dialog } = remote;
+      dialog.showMessageBox({ type: 'error', message: `이미지 파일 ${file} 로드에 실패했습니다.` });
+      window.close();
+    }
+  }
+  return images;
+};
+
 // repr array for csv format
 const dumpArray = arr => `"[${arr}]"`.replace(/,/g, ', ');
 
