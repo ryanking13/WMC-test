@@ -233,20 +233,20 @@
             inp = false;
           }
 
-          if (e.keyCode === RIGHT) {
-            this.rightButtonScale = 10;
-            this.rightPressed = true;
-          } else if (e.keyCode === LEFT) {
-            this.leftButtonScale = 10;
-            this.leftPressed = true;
-          }
+          // if (e.keyCode === RIGHT) {
+          //   this.rightButtonScale = 10;
+          //   this.rightPressed = true;
+          // } else if (e.keyCode === LEFT) {
+          //   this.leftButtonScale = 10;
+          //   this.leftPressed = true;
+          // }
 
-          setTimeout(() => {
-            this.rightButtonScale = 8;
-            this.leftButtonScale = 8;
-            this.rightPressed = false;
-            this.leftPressed = false;
-          }, this.interval);
+          // setTimeout(() => {
+          //   this.rightButtonScale = 8;
+          //   this.leftButtonScale = 8;
+          //   this.rightPressed = false;
+          //   this.leftPressed = false;
+          // }, this.interval);
 
           this.userInputSentence.push(inp);
           this.visible = false;
@@ -257,7 +257,7 @@
             // add listner again
             window.addEventListener('keyup', this.arrowKeyListener);
             this.changeNumbers(this.countdown);
-          }, this.interval);
+          }, this.hideInterval);
         }
       },
     },
