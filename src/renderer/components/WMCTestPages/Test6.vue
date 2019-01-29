@@ -32,7 +32,7 @@
                   ref="inp" 
                   autofocus
                   @keydown.enter="submit"
-                  @input="userInputRaw = $event.target.value"
+                  @input="disassembleUserInput"
                   id="input-massive"
                 />
             </sui-form-field>
@@ -88,7 +88,7 @@
         visible: true,
         currentIndex: -1,
 
-        // userInput: '',
+        userInput: '',
         userInputRaw: '',
         userInputValid: true,
         invalidSubmit: false,
@@ -123,9 +123,9 @@
       userInputInvalidLabelOn() {
         return this.userInputValid === false || this.invalidSubmit === true;
       },
-      userInput() {
-        return disassemble(this.userInputRaw);
-      },
+      // userInput() {
+      //   return disassemble(this.userInputRaw);
+      // },
     },
     methods: {
       changeNumbers(c) {
@@ -181,6 +181,17 @@
         if (typeof this.$refs.inp !== 'undefined') {
           this.$refs.inp.focus();
         }
+      },
+      disassembleUserInput(e) {
+        const disassembled = disassemble(e.target.value);
+        e.target.value = disassembled.join('');
+        this.userInput = disassembled;
+        this.$nextTick(() => {
+          if (typeof this.$refs.inp !== 'undefined') {
+            this.$refs.inp.selectionStart = e.target.value.length;
+            this.$refs.inp.selectionEnd = e.target.value.length + 1;
+          }
+        });
       },
     },
     watch: {
