@@ -11,7 +11,7 @@
         <sui-grid-column>
           <sui-segment class="test header">
             <h3 is='sui-header' size='large' color="teal">정답여부</h3>
-            <h1 is='sui-header' size='large' id="input-up-massive">
+            <h1 v-if="showMatch" is='sui-header' size='large' id="input-up-massive">
               <span v-for="(match, idx) in matches" :key="`match${idx}`" color="black">
                 <span v-if="match === 1" is="sui-header" color="green">O</span>
                 <span v-else-if="match === 0" is="sui-header" color="red">X</span>
@@ -141,6 +141,7 @@
         failCount: 0,
         matches: [],
         matchesSub: [],
+        showMatch: false,
         trialResults: [],
         hideCursor: false,
         delayed: false,
@@ -220,6 +221,11 @@
       handleSubmit(userInput, userInputSub) {
         this.inputs = userInput;
         this.matches = this.inputs.map((e, i) => (e === this.currentAnswer[i] ? 1 : 0));
+        this.showMatch = true;
+
+        setTimeout(() => {
+          this.showMatch = false;
+        }, 1000);
 
         if (typeof userInputSub !== 'undefined') {
           this.inputsSub = userInputSub;
