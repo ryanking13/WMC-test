@@ -372,6 +372,7 @@
 
   #test-symmetry-image {
     margin-top: 15vh;
+    transform: scale(1.4);
     margin-bottom: 5vh;
   }
 
