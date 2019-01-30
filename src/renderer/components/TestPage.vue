@@ -99,6 +99,18 @@
       :practice="testType === 'practice'"
       :message="inputExplanationMessage"
     />
+    <Test8
+      v-if="testId === '8'"
+      :numbers="currentTrial.number"
+      :answerNumbers="currentAnswer"
+      :images="currentTrial.image"
+      :answerImages="currentSubAnswer"
+      :interval="interval"
+      :hideInterval="hideInterval"
+      :handleSubmit="handleSubmit"
+      :setDelayed="setDelayed"
+      :practice="testType === 'practice'"
+    />
   </div>
 </template>
 
@@ -110,6 +122,7 @@
   import Test5 from './WMCTestPages/Test5';
   import Test6 from './WMCTestPages/Test6';
   import Test7 from './WMCTestPages/Test7';
+  import Test8 from './WMCTestPages/Test8';
   import { toDate, toTime, timeDiff } from '../utils/conversions';
   import { getState, setState } from '../utils/state';
 
@@ -123,7 +136,7 @@
       },
     },
     components: {
-      Test1, Test2, Test3, Test4, Test5, Test6, Test7,
+      Test1, Test2, Test3, Test4, Test5, Test6, Test7, Test8,
     },
     data() {
       return {
@@ -172,7 +185,7 @@
         if (this.testId === '5') { // reading
           answer = answer.number;
         } else if (this.testId === '8') { // Symmetry
-          answer = answer.matrix;
+          answer = answer.number;
         }
         return answer;
       },

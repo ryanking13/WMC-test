@@ -183,17 +183,23 @@
       },
       onMouseOverArrow(r, c) {
         const idx = this.rc2idx(r, c);
-        this.arrowHovered = this.arrowHovered.map((e, i) => (i === idx ? true : e));
+        if (idx !== 0) {
+          this.arrowHovered = this.arrowHovered.map((e, i) => (i === idx ? true : e));
+        }
       },
       onMouseLeaveArrow(r, c) {
         const idx = this.rc2idx(r, c);
-        this.arrowHovered = this.arrowHovered.map((e, i) => (i === idx ? false : e));
+        if (idx !== 0) {
+          this.arrowHovered = this.arrowHovered.map((e, i) => (i === idx ? false : e));
+        }
       },
       onMouseClickArrow(r, c) {
         const idx = this.rc2idx(r, c);
-        if (this.userInput.length < this.answer.length && this.userInput.indexOf(idx) === -1) {
-          this.arrowClicked = this.arrowClicked.map((e, i) => (i === idx ? true : e));
-          this.userInput = this.userInput.concat(idx);
+        if (idx !== 0) {
+          if (this.userInput.length < this.answer.length && this.userInput.indexOf(idx) === -1) {
+            this.arrowClicked = this.arrowClicked.map((e, i) => (i === idx ? true : e));
+            this.userInput = this.userInput.concat(idx);
+          }
         }
       },
       arrowState(r, c) {

@@ -51,7 +51,7 @@
       setState('tests', cfg);
       setState('current-test-id', 0);
 
-      for (let i = 1; i <= 7; i += 1) {
+      for (let i = 1; i <= 8; i += 1) {
         const cfg = loadTestConfig(i);
         // window.$cookies.set(`test${i}-config`, cfg);
         setState(`test${i}-config`, cfg);
