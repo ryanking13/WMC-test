@@ -14,6 +14,7 @@
     "interval": 1000,
     "hideInterval": 0,
     "hideCursor": true,
+    "hideNumber": true,
     "practiceQuestions": [
         [1, 8],
         [6, 1, 3]
