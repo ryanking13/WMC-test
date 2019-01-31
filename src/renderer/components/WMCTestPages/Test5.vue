@@ -7,7 +7,7 @@
     <div id="test-div" v-if="!ready">
       <div id="test-div-elem">
         <h1
-          v-if="visible === true && !onSentence"
+          v-if="hideNumber === false && visible === true && !onSentence"
           id="testletter"
           is="sui-header"
           size="massive"
@@ -109,6 +109,7 @@
       'practice',
       'message',
       'setDelayed',
+      'hideNumber',
     ],
     components: {
       InvalidLabel,

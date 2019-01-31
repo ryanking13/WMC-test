@@ -91,7 +91,7 @@
           <sui-form-field>
             <h3 is="sui-header" id="tinytitle" size="large">이름</h3>
             <input
-              id="input-large"
+              id="input-large-korean"
               @keydown.enter="blockEnter"
               @input="nameInput = $event.target.value"
               placeholder="예) 홍길동"

@@ -28,10 +28,11 @@
           <div class="" v-for="c in 3" :key="`colreal${c}`">
             <sui-button
               class=""
+              compact
               id="arrow-button"
             >
               <img
-                :src="image[rc2idx(r, c)].src"
+                :src="imageCircle[rc2idx(r, c)].src"
                 width="150"
                 height="150"
                 @mouseover="onMouseOverArrow(r, c)"
@@ -50,10 +51,11 @@
             <sui-button
               class=""
               id="arrow-button"
+              compact
             >
               <img
                 v-if="rc2idx(r, c) !== 0"
-                :src="image[rc2idx(r, c)].src"
+                :src="imageCircle[rc2idx(r, c)].src"
                 width="150"
                 height="150"
                 :id="answerArrowState(r, c)"
@@ -95,6 +97,7 @@
         invalidSubmit: false,
 
         image: getImage().arrow,
+        imageCircle: getImage().arrowCircle,
         answerStr: '',
         answerRevealed: false,
         userInputRevealed: false,
@@ -291,7 +294,7 @@
     height: 100%;
     text-align: center;
     align-items: center;
-    justify-content: center;  
+    justify-content: center;
   }
 
   .matrix-button {

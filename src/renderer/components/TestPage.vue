@@ -35,6 +35,7 @@
       :interval="interval"
       :hideInterval="hideInterval"
       :handleSubmit="handleSubmit"
+      :hideNumber="hideNumber"
       :practice="testType === 'practice'"
       :message="inputExplanationMessage"
     />
@@ -45,6 +46,7 @@
       :interval="interval"
       :hideInterval="hideInterval"
       :handleSubmit="handleSubmit"
+      :hideNumber="hideNumber"
       :practice="testType === 'practice'"
       :message="inputExplanationMessage"
     />
@@ -75,6 +77,7 @@
       :interval="interval"
       :hideInterval="hideInterval"
       :handleSubmit="handleSubmit"
+      :hideNumber="hideNumber"
       :setDelayed="setDelayed"
       :practice="testType === 'practice'"
       :message="inputExplanationMessage"
@@ -86,6 +89,7 @@
       :interval="interval"
       :hideInterval="hideInterval"
       :handleSubmit="handleSubmit"
+      :hideNumber="hideNumber"
       :practice="testType === 'practice'"
       :message="inputExplanationMessage"
     />
@@ -157,6 +161,7 @@
         showMatch: false,
         trialResults: [],
         hideCursor: false,
+        hideNumber: false,
         delayed: false,
 
         cfg: null,
@@ -226,6 +231,7 @@
       this.interval = this.cfg.interval;
       this.hideInterval = this.cfg.hideInterval;
       this.hideCursor = this.cfg.hideCursor;
+      this.hideNumber = this.cfg.hideNumber;
       this.inputExplanationMessage = this.cfg.inputExplanationMessage;
       this.testStartTime = new Date();
       this.trialStartTime = new Date();

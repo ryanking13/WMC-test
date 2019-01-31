@@ -289,6 +289,14 @@
     font-size: 1.3rem;
   }
 
+  #input-large-korean {
+    font-size: 1.3rem;
+    -webkit-ime-mode:active; 
+    -moz-ime-mode:active; 
+    -ms-ime-mode:active; 
+    ime-mode:active; 
+  }
+
   #input-huge {
     font-size: 1.8rem;
   }

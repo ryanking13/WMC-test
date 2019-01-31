@@ -3,7 +3,7 @@
     <div id="test-div">
       <div id="test-div-elem">
         <h1
-          v-if="visible === true"
+          v-if="hideNumber === false && visible === true"
           id="testletter"
           is="sui-header"
           size="massive"
@@ -78,6 +78,7 @@
       'handleSubmit',
       'practice',
       'message',
+      'hideNumber',
     ],
     components: {
       InvalidLabel,
