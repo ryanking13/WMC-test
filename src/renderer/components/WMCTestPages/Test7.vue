@@ -198,10 +198,14 @@
       },
       onMouseClickArrow(r, c) {
         const idx = this.rc2idx(r, c);
+        const inputIdx = this.userInput.indexOf(idx);
         if (idx !== 0) {
-          if (this.userInput.length < this.answer.length && this.userInput.indexOf(idx) === -1) {
+          if (this.userInput.length < this.answer.length && inputIdx === -1) {
             this.arrowClicked = this.arrowClicked.map((e, i) => (i === idx ? true : e));
             this.userInput = this.userInput.concat(idx);
+          } else if (this.userInput.length < this.answer.length && inputIdx !== -1) {
+            this.arrowClicked = this.arrowClicked.map((e, i) => (i === idx ? false : e));
+            this.userInput = this.userInput.filter((e, i) => e !== idx);
           }
         }
       },
