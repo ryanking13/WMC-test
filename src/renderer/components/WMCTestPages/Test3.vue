@@ -8,7 +8,7 @@
             <sui-button
               class="matrix-button"
               disabled
-              :inverted="!isElementOn(r, c)"
+              :basic="!isElementOn(r, c)"
               :color="elementColor(r, c)"
             >
             </sui-button>
@@ -21,8 +21,9 @@
           <div class="matrix-element" v-for="c in 4" :key="`colreal${c}`">
             <sui-button
               class="matrix-button"
+              :ref="`button_${r}_${c}`"
               @click="userInputClick(r, c)"
-              :inverted="!isUserInputClicked(r, c)"
+              :basic="!isUserInputClicked(r, c)"
               :color="userInputColor(r, c)"
             >
             </sui-button>
@@ -35,7 +36,7 @@
           <div class="matrix-element" v-for="c in 4" :key="`colreal${c}`">
             <sui-button
               disabled
-              inverted
+              basic
               color="grey"
               class="matrix-button"
             >
@@ -76,6 +77,11 @@
 
         answerStr: '',
         answerRevealed: false,
+
+        hovered: [
+          false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false,
+        ],
       };
     },
     computed: {
@@ -129,10 +135,32 @@
         return true;
       },
       userInputClick(r, c) {
+        const idx = this.userInput.indexOf(this.rc2idx(r, c));
         if (this.userInput.length < this.numbers.length &&
-            this.userInput.indexOf(this.rc2idx(r, c)) === -1) {
+            idx === -1) {
           this.userInput = this.userInput.concat(this.rc2idx(r, c));
+        } else if (this.userInput.length < this.numbers.length && idx > -1) {
+          this.userInput = this.userInput.filter((e, i) => i !== idx);
         }
+      },
+      onMouseOverButton(r, c) {
+        const idx = this.rc2idx(r, c);
+        if (idx !== -1) {
+          this.hovered = this.hovered.map((e, i) => (i === idx ? true : e));
+        }
+      },
+      onMouseLeaveButton(r, c) {
+        const idx = this.rc2idx(r, c);
+        if (idx !== -1) {
+          this.hovered = this.hovered.map((e, i) => (i === idx ? false : e));
+        }
+      },
+      isUserHovered(r, c) {
+        const idx = this.rc2idx(r, c);
+        if (this.hovered[idx] === true) {
+          return true;
+        }
+        return false;
       },
       userInputColor(r, c) {
         if (this.userInput.indexOf(this.rc2idx(r, c)) === -1) {
@@ -231,4 +259,13 @@
     width: 90%;
     height: 90%;
   }
+
+  #matrix-button-input-clicked {
+    background-color: blue;
+  }
+
+  #matrix-button-input-notclicked {
+    background-color: grey;
+  }
+
 </style>
