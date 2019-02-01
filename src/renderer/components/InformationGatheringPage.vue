@@ -11,7 +11,7 @@
                 size="big"
                 @click="onClickSchoolButtonSukGye"
               >
-                석계
+                {{ globalCfg.defaultSchoolName }}
               </sui-button>
               <sui-button
                 :color="(schoolButtonElseOn === true) ? 'orange' : 'blue'"
@@ -131,7 +131,7 @@
   import MovePageButton from './BaseComponents/MovePageButton';
   import InvalidLabel from './BaseComponents/InvalidLabel';
   import { isDigit, isKorean } from '../utils/inputCheck';
-  import { setState } from '../utils/state';
+  import { setState, getState } from '../utils/state';
 
   export default {
     name: 'information-gathering-page',
@@ -192,6 +192,8 @@
 
         sexButtonMaleOn: false,
         sexButtonFemaleOn: false,
+
+        globalCfg: null,
       };
     },
     computed: {
@@ -250,7 +252,9 @@
         const userCookie = {};
         const year = this.birthYearOptions.filter(e => e.value === this.birthYearInput)[0].text;
         const month = this.birthMonthOptions.filter(e => e.value === this.birthMonthInput)[0].text;
-        userCookie.school = (this.schoolButtonSukgyeOn) ? 'Sukgye' : this.schoolInput;
+        userCookie.school = (this.schoolButtonSukgyeOn) ?
+          this.globalCfg.defaultSchoolNameRepr : this.schoolInput;
+
         userCookie.grade = this.gradeInput;
         userCookie.class = this.classInput;
         userCookie.year = year;
@@ -264,6 +268,9 @@
       blockEnter(e) {
         if (e) e.preventDefault();
       },
+    },
+    created() {
+      this.globalCfg = getState('global-config');
     },
   };
 </script>

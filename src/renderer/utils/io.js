@@ -37,6 +37,39 @@ export const loadConfig = (cfgFileName, maxTests) => {
   return cfg;
 };
 
+export const loadGlobalConfig = (fileName) => {
+  const fs = require('fs');
+  const cfgFileName = path.join(__static, `config/${fileName}`);
+  let f;
+
+  // try both EUC-KR and UTF-8 encoding
+  try {
+    f = fs.readFileSync(cfgFileName, 'utf-8');
+  } catch (e) {
+    try {
+      f = fs.readFileSync(cfgFileName, 'binary');
+      f = iconv.decode(f, 'euc-kr');
+    } catch (e) {
+      // if both fail, consider config file not exists
+      const { dialog } = remote;
+      dialog.showMessageBox({ type: 'error', message: `${cfgFileName} 파일이 존재하지 않습니다.` });
+      window.close();
+    }
+  }
+
+  let cfg;
+  try {
+    cfg = JSON.parse(f);
+  } catch (e) {
+    // JSON parsing failed
+    const { dialog } = remote;
+    dialog.showMessageBox({ type: 'error', message: `${cfgFileName} 파일이 올바른 JSON 문법이 아닙니다.` });
+    window.close();
+  }
+
+  return cfg;
+};
+
 export const loadTestConfig = (testId) => {
   const fs = require('fs');
   const cfgFileName = path.join(__static, `config/Test${testId}cfg.json`);

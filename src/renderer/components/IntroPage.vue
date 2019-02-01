@@ -12,7 +12,7 @@
 
 <script>
   import MovePageButton from './BaseComponents/MovePageButton';
-  import { loadConfig, loadTestConfig, loadAudio, loadImage } from '../utils/io';
+  import { loadConfig, loadTestConfig, loadGlobalConfig, loadAudio, loadImage } from '../utils/io';
   import { registerAudio } from '../utils/audio';
   import { registerImage } from '../utils/image';
   import { EnterMoveListener } from '../utils/eventListeners';
@@ -35,8 +35,10 @@
       window.addEventListener('keyup', this.enterListener);
 
       const cfgFileName = 'WMCtest.cfg';
+      const globalCfgFileName = 'globalcfg.json';
       const maxTests = 8;
       const cfg = loadConfig(cfgFileName, maxTests);
+      const globalCfg = loadGlobalConfig(globalCfgFileName);
       const audios = loadAudio();
       registerAudio(audios);
       const images = loadImage();
@@ -50,6 +52,7 @@
       setState('test-result', {});
       setState('tests', cfg);
       setState('current-test-id', 0);
+      setState('global-config', globalCfg);
 
       for (let i = 1; i <= 8; i += 1) {
         const cfg = loadTestConfig(i);
