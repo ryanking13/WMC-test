@@ -12,7 +12,7 @@
             <sui-button
               class="matrix-button"
               disabled
-              :inverted="!isElementOn(r, c)"
+              :basic="!isElementOn(r, c)"
               :color="elementColor(r, c)"
             >
             </sui-button>
@@ -26,7 +26,7 @@
             <sui-button
               class="matrix-button"
               @click="userInputClick(r, c)"
-              :inverted="!isUserInputClicked(r, c)"
+              :basic="!isUserInputClicked(r, c)"
               :color="userInputColor(r, c)"
             >
             </sui-button>
@@ -39,7 +39,7 @@
           <div class="matrix-element" v-for="c in 4" :key="`colreal${c}`">
             <sui-button
               disabled
-              inverted
+              basic
               color="grey"
               class="matrix-button"
             >
@@ -200,9 +200,12 @@
         return true;
       },
       userInputClick(r, c) {
+        const idx = this.userInput.indexOf(this.rc2idx(r, c));
         if (this.userInput.length < this.numbers.length &&
-            this.userInput.indexOf(this.rc2idx(r, c)) === -1) {
+            idx === -1) {
           this.userInput = this.userInput.concat(this.rc2idx(r, c));
+        } else if (this.userInput.length < this.numbers.length && idx > -1) {
+          this.userInput = this.userInput.filter((e, i) => i !== idx);
         }
       },
       userInputColor(r, c) {
