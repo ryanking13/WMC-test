@@ -4,13 +4,12 @@
     "testTitle": "숫자 기억하기",
     "trialUnit": "숫자",
     "explanationMessages": [
-        "1부터 9까지 수 중에서 화면에 보였던 순서대로 입력하세요.",
-        "각 숫자는 1초 동안 보였다 사라집니다.",
+        "잘 듣고, 1부터 9까지 수 중에서 제시된 순서대로 입력하세요.",
         "숫자의 개수는 점차 늘어납니다.",
         "세 번 연속 틀리면 검사가 종료됩니다.",
         "검사를 진행하려면 다음 버튼을 클릭해주세요."
     ],
-    "inputExplanationMessage": "본 순서대로 수를 입력하고<br/>Enter를 누르세요.",
+    "inputExplanationMessage": "순서대로 수를 입력하고<br/>Enter를 누르세요.",
     "interval": 1000,
     "hideInterval": 0,
     "hideCursor": true,
