@@ -110,6 +110,7 @@
       'message',
       'setDelayed',
       'hideNumber',
+      'handleSubmitSub',
     ],
     components: {
       InvalidLabel,
@@ -148,6 +149,9 @@
       },
       userInputInvalidLabelOn() {
         return this.userInputValid === false || this.invalidSubmit === true;
+      },
+      currentSentenceAnswer() {
+        return this.answerSentences[this.currentIndex];
       },
     },
     methods: {
@@ -253,6 +257,7 @@
           this.visible = false;
 
           setTimeout(() => {
+            this.handleSubmitSub(inp === this.currentSentenceAnswer ? 1 : 0);
             this.visible = true;
             this.onSentence = false;
             // add listner again

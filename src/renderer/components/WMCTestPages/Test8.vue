@@ -94,6 +94,7 @@
       'handleSubmit',
       'practice',
       'setDelayed',
+      'handleSubmitSub',
     ],
     components: {
     },
@@ -132,6 +133,9 @@
           return '';
         }
         return path.join(__static, `/image/${this.images[this.currentIndex]}`);
+      },
+      currentAnswerImage() {
+        return this.answerImages[this.currentIndex];
       },
     },
     methods: {
@@ -261,6 +265,7 @@
           this.visible = false;
 
           setTimeout(() => {
+            this.handleSubmitSub(inp === this.currentAnswerImage ? 1 : 0);
             this.visible = true;
             this.onImage = false;
             // add listner again

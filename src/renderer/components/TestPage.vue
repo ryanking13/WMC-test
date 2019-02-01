@@ -17,6 +17,10 @@
                 <span v-else-if="match === 0" is="sui-header" color="red">X</span>
               </span>
             </h1>
+            <h1 v-if="showMatchSub" is='sui-header' size='large' id="input-up-massive">
+              <span v-if="matchSub === 1" is="sui-header" color="green">O</span>
+              <span v-else-if="matchSub === 0" is="sui-header" color="red">X</span>
+            </h1>
           </sui-segment>
         </sui-grid-column>
         <sui-grid-column>
@@ -81,6 +85,7 @@
       :setDelayed="setDelayed"
       :practice="testType === 'practice'"
       :message="inputExplanationMessage"
+      :handleSubmitSub="toggleMatchSub"
     />
     <Test6
       v-if="testId === '6'"
@@ -114,6 +119,7 @@
       :handleSubmit="handleSubmit"
       :setDelayed="setDelayed"
       :practice="testType === 'practice'"
+      :handleSubmitSub="toggleMatchSub"
     />
   </div>
 </template>
@@ -169,6 +175,9 @@
         testEndTime: null,
         trialStartTime: null,
         trialEndTime: null,
+
+        showMatchSub: false,
+        matchSub: 0,
       };
     },
     computed: {
@@ -238,6 +247,7 @@
     },
     methods: {
       handleSubmit(userInput, userInputSub) {
+        this.showMatchSub = false;
         this.inputs = userInput;
         this.matches = this.inputs.map((e, i) => (e === this.currentAnswer[i] ? 1 : 0));
         this.showMatch = true;
@@ -334,6 +344,16 @@
             this.$router.push('/test-selection');
           }, this.interval);
         }
+      },
+      toggleMatchSub(v) {
+        this.matchSub = v;
+        this.$nextTick(() => {
+          this.showMatchSub = true;
+        });
+
+        setTimeout(() => {
+          this.showMatchSub = false;
+        }, this.interval);
       },
     },
   };
