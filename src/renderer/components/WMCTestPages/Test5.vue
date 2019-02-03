@@ -254,16 +254,16 @@
           // }, this.interval);
 
           this.userInputSentence.push(inp);
-          this.visible = false;
+          // this.visible = false;
+          this.handleSubmitSub(inp === this.currentSentenceAnswer ? 1 : 0);
+          this.visible = true;
+          this.onSentence = false;
 
           setTimeout(() => {
-            this.handleSubmitSub(inp === this.currentSentenceAnswer ? 1 : 0);
-            this.visible = true;
-            this.onSentence = false;
-            // add listner again
+            // add listener again
             window.addEventListener('keyup', this.arrowKeyListener);
             this.changeNumbers(this.countdown);
-          }, this.hideInterval);
+          }, this.interval);
         }
       },
     },

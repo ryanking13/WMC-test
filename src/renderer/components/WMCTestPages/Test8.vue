@@ -265,16 +265,16 @@
           // }, this.interval);
 
           this.userInputImage.push(inp);
-          this.visible = false;
+          // this.visible = false;
+          this.handleSubmitSub(inp === this.currentAnswerImage ? 1 : 0);
+          this.visible = true;
+          this.onImage = false;
 
           setTimeout(() => {
-            this.handleSubmitSub(inp === this.currentAnswerImage ? 1 : 0);
-            this.visible = true;
-            this.onImage = false;
             // add listner again
             window.addEventListener('keyup', this.arrowKeyListener);
             this.changeNumbers(this.countdown);
-          }, this.hideInterval);
+          }, this.interval);
         }
       },
       submit(e) {
