@@ -1,4 +1,7 @@
 {
     "defaultSchoolName": "석계",
-    "defaultSchoolNameRepr": "Sukgye"
+    "defaultSchoolNameRepr": "Sukgye",
+    "birthYearStart": "2006",
+    "birthYearEnd": "2012",
+    "birthYearDefault": "2007"
 }

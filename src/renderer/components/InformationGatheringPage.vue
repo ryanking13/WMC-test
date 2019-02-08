@@ -271,6 +271,23 @@
     },
     created() {
       this.globalCfg = getState('global-config');
+
+      const birthYearOptions = [];
+      const birthYearStart = parseInt(this.globalCfg.birthYearStart, 10);
+      const birthYearEnd = parseInt(this.globalCfg.birthYearEnd, 10);
+      const { birthYearDefault } = this.globalCfg;
+      const optionsCount = (birthYearEnd - birthYearStart) + 1;
+      for (let i = 0; i < optionsCount; i += 1) {
+        birthYearOptions.push({ text: (birthYearStart + i).toString(), value: (i + 1) });
+      }
+
+      this.birthYearOptions = birthYearOptions.map(e => e);
+      this.birthYearInput = this.birthYearOptions.filter(e => e.text === birthYearDefault)[0].value;
+      this.$nextTick(() => {
+        if (typeof this.birthYearInput === 'undefined') {
+          this.birthYearInput = 1;
+        }
+      });
     },
   };
 </script>
