@@ -297,6 +297,8 @@
         result.trialLoad = result.trialQuestion.length;
         result.anuPoints = this.matches.every(e => e === 1) ? 1 : 0;
         result.anlPoints = result.trialLoad * result.anuPoints;
+        result.pnuPoints = this.matches.reduce((a, b) => a + b, 0);
+        result.pnlPoints = result.trialLoad * result.pnuPoints;
         result.trialResult = result.anuPoints === 1 ? 'success' : 'failure';
         result.trialStartTime = toTime(this.trialStartTime);
         result.trialEndTime = toTime(this.trialEndTime);
@@ -308,6 +310,7 @@
           result.interResponse = this.inputsSub.map(e => (e === true ? 1 : 0));
           result.interPoints = this.matchesSub.every(e => e === 1) ? 1 : 0;
           result.interResult = result.interPoints === 1 ? 'success' : 'failure';
+          result.inPartPoints = this.matchesSub.reduce((a, b) => (a + b), 0);
         }
 
         return result;

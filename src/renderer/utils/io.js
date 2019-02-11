@@ -192,7 +192,7 @@ export const loadImage = () => {
 const dumpArray = arr => `"[${arr}]"`.replace(/,/g, ', ');
 
 const formatResultType1 = (user, result) => {
-  const type1Header = 'school.name,grade.class,number,name,birth.year.month,sex,test.id,test.date,test.startTime,test.endTime,trial.No,trial.question,trial.response,trial.result,trial.load,ANU.points,ANL.points,trial.startTime,trial.endTime,trial.durationTime';
+  const type1Header = 'school.name,grade.class,number,name,birth.year.month,sex,test.id,test.date,test.startTime,test.endTime,trial.No,trial.question,trial.response,trial.result,trial.load,ANU.points,ANL.points,PNU.points,PNL.points,trial.startTime,trial.endTime,trial.durationTime';
   const type1Tests = [1, 2, 3, 4, 6, 7];
 
   let s = type1Header;
@@ -205,7 +205,7 @@ const formatResultType1 = (user, result) => {
         s += `${user.school},${user.grade}${user.class},${user.number},${user.name},${user.year}${user.month},${user.sex},`;
         s += `${r.testId},${r.testDate},${r.testStartTime},${r.testEndTime},${r.trialNo},`;
         s += `${dumpArray(r.trialQuestion)},${dumpArray(r.trialResponse)},${r.trialResult},${r.trialLoad},`;
-        s += `${r.anuPoints},${r.anlPoints},${r.trialStartTime},${r.trialEndTime},${r.trialDurationTime}`;
+        s += `${r.anuPoints},${r.anlPoints},${r.pnuPoints},${r.pnlPoints},${r.trialStartTime},${r.trialEndTime},${r.trialDurationTime}`;
       });
     }
   });
@@ -213,7 +213,7 @@ const formatResultType1 = (user, result) => {
 };
 
 const formatResultType2 = (user, result) => {
-  const type2Header = 'school.name,grade.class,number,name,birth.year.month,sex,test.id,test.date,test.startTime,test.endTime,trial.No,trial.answer,trial.response,trial.result,trial.load,ANU.points,ANL.points,trial.startTime,trial.endTime,trial.durationTime,inter.answer,inter.response,inter.result,inter.points';
+  const type2Header = 'school.name,grade.class,number,name,birth.year.month,sex,test.id,test.date,test.startTime,test.endTime,trial.No,trial.answer,trial.response,trial.result,trial.load,ANU.points,ANL.points,ANU.points,ANL.points,trial.startTime,trial.endTime,trial.durationTime,inter.answer,inter.response,inter.result,inter.points,in.part.point';
   const type2Tests = [5, 8];
   let s = type2Header;
   type2Tests.forEach((e) => {
@@ -225,8 +225,8 @@ const formatResultType2 = (user, result) => {
         s += `${user.school},${user.grade}${user.class},${user.number},${user.name},${user.year}${user.month},${user.sex},`;
         s += `${r.testId},${r.testDate},${r.testStartTime},${r.testEndTime},${r.trialNo},`;
         s += `${dumpArray(r.trialQuestion)},${dumpArray(r.trialResponse)},${r.trialResult},${r.trialLoad},`;
-        s += `${r.anuPoints},${r.anlPoints},${r.trialStartTime},${r.trialEndTime},${r.trialDurationTime},`;
-        s += `${dumpArray(r.interAnswer)},${dumpArray(r.interResponse)},${r.interResult},${r.interPoints}`;
+        s += `${r.anuPoints},${r.anlPoints},${r.pnuPoints},${r.pnlPoints},${r.trialStartTime},${r.trialEndTime},${r.trialDurationTime},`;
+        s += `${dumpArray(r.interAnswer)},${dumpArray(r.interResponse)},${r.interResult},${r.interPoints},${r.inPartPoints}`;
       });
     }
   });
